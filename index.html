@@ -11,6 +11,10 @@
   <body></body>
   <script>
 
+  document.addEventListener('DOMContentLoaded', function() {
+  var context = new AudioContext();
+});
+    
   var pre_trial = {
     type: 'html-button-response',
     stimulus: '<div style="max-width:600px;"><p>Some browsers now require that a user interacts with a web page before video or audio content will autoplay. Clicking the button below satisfies that requirement.</p><p>Without this trial, the video will load but not play.</p></div>',
