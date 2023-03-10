@@ -6,16 +6,10 @@
     <script src="jspsych-html-button-response.js"></script>
     <script src="jspsych-preload.js"></script>
     <link rel="stylesheet" href="jspsych.css">
-    <video id="video" width="600" height="400" controls >
-      <source src="P1U-reduced.mp4" type="video/mp4">
+    <video id="video" width="600" height="400" src="P1U-reduced.mp4" type="video/mp4" controls></video>
   </head>
   <body></body>
   <script>
-  
-  var context = new AudioContext();
-        document.addEventListener('mousedown', function() {
-            context.resume();
-        });
 
   var pre_trial = {
     type: 'html-button-response',
@@ -23,41 +17,29 @@
     choices: ['continue']
   }
 
-  var borderColor = 'black';
-
   var trial_1 = {
     type: 'video-keyboard-response',
-    stimulus: 'P1U-reduced.mp4',
-    // stimulus: 'https://drive.google.com/file/d/1n9uBpwFsGgL4gL1G7TiFqehnF4bvYtFU/view?usp=share_link',
+    stimulus: ['P1U-reduced.mp4'],
     choices: ['f', 'j'],
     prompt: 'Press F for event boundaries or J for the end of scene.',
     width: 600,
     autoplay: true,
     rate: 1,
     response_ends_trial: false,
-    on_load: function() {
-      // add event listeners for key presses
-      document.addEventListener('keydown', handleKeyPress);
-    },
     on_finish: function(data) {
-      // do nothing - we'll handle the border color in the key press handler
+    if (data.key_press == 70) { // 'f' was pressed
+      document.querySelector('video').style.borderColor = 'blue';
+      setTimeout(function() {
+        document.querySelector('video').style.borderColor = 'black';
+      }, 200);
+    } else if (data.key_press == 74) { // 'j' was pressed
+      document.querySelector('video').style.borderColor = 'red';
+      setTimeout(function() {
+        document.querySelector('video').style.borderColor = 'black';
+      }, 1000);
     }
-  };
-
-// define the key press handler
-function handleKeyPress(event) {
-  if (event.key === 'F') {
-    borderColor = 'blue';
-  } else if (event.key === 'J') {
-    borderColor = 'red';
   }
-
-  // set the border color and schedule a reset
-  document.querySelector('video').style.borderColor = borderColor;
-  setTimeout(function() {
-    document.querySelector('video').style.borderColor = 'black';
-  }, 200);
-}
+  };
 
   var trial_2 = {
     type: 'video-keyboard-response',
