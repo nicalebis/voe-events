@@ -6,7 +6,7 @@
     <script src="jspsych-html-button-response.js"></script>
     <script src="jspsych-preload.js"></script>
     <link rel="stylesheet" href="jspsych.css">
-    <video id="video" width="600" height="400" src="P1U-reduced.mp4" type="video/mp4" controls></video>
+    <video id="video1" width="600" height="400" src="https://drive.google.com/file/d/1n9uBpwFsGgL4gL1G7TiFqehnF4bvYtFU/view?usp=share_link" type="video/mp4" controls></video>
   </head>
   <body></body>
   <script>
@@ -19,7 +19,7 @@
 
   var trial_1 = {
     type: 'video-keyboard-response',
-    stimulus: ['P1U-reduced.mp4'],
+    stimulus: 'video1',
     choices: ['f', 'j'],
     prompt: 'Press F for event boundaries or J for the end of scene.',
     width: 600,
@@ -43,7 +43,7 @@
 
   var trial_2 = {
     type: 'video-keyboard-response',
-    stimulus: ['P1U-reduced.mp4'],
+    stimulus: 'video1',
     choices: jsPsych.ALL_KEYS,
     prompt: '<p>When the video stops, press any key to end the trial.</p><p>Responses that are made before the video ends will be ignored.</p>',
     width: 600,
