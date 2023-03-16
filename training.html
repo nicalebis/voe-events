@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Training Trial</h1>
+  <div class="video-container" id="trainingVideoContainer">
+    <video id="trainingVideo" width="640" height="360" controls>
+      <source src="path/to/your/training/video.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    const trainingVideoContainer = document.getElementById("trainingVideoContainer");
+    const trainingVideo = document.getElementById("trainingVideo");
+
+    document.addEventListener("keydown", function(event) {
+      if (event.code === "Space") {
+        const currentTime = new Date().getTime();
+        console.log("Spacebar pressed at:", currentTime);
+        trainingVideoContainer.style.borderColor = "red";
+
+        // Record the reaction time, trial ID, and other necessary data here
+        // Send the data to your server if needed
+      }
+    });
+
+    document.addEventListener("keyup", function(event) {
+      if (event.code === "Space") {
+        trainingVideoContainer.style.borderColor = "black";
+      }
+    });
+  </script>
+</body>
+</html>
