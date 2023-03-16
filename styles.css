@@ -5,6 +5,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 .video-container {
@@ -16,6 +17,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -23,5 +25,5 @@ h1 {
 }
 
 button {
-  margin: 10px;
+  margin: 5px;
 }
