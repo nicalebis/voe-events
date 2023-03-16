@@ -106,10 +106,16 @@
   mainTrialVideo.play();
 });
 
-    finishExperimentButton.addEventListener("click", function () {
-      // Perform any necessary actions, such as redirecting the user to a different page
-      console.log("Experiment finished");
-    });
+  function convertToCSV(data) {
+  const header = ["Trial ID", "Event", "Timestamp", "Video Time", "Relative Time"];
+  const csvRows = [header.join(",")];
+
+  for (const row of data) {
+    csvRows.push(Object.values(row).join(","));
+  }
+
+  return csvRows.join("\n");
+}
 
   </script>
 </body>
