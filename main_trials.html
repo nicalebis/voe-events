@@ -74,19 +74,20 @@
     });
     
     function nextVideo() {
-      currentVideoIndex++;
-      if (currentVideoIndex >= videoSources.length) {
-        currentVideoIndex = 0;
-        loopCounter++;
+  currentVideoIndex++;
+  if (currentVideoIndex >= videoSources.length) {
+    currentVideoIndex = 0;
+    loopCounter++;
 
-        if (loopCounter >= maxLoops) {
-          // Proceed to the next part of the experiment (e.g., debrief)
-          return;
-        }
-      }
-
-      mainTrialVideo.src = videoSources[currentVideoIndex];
+    if (loopCounter >= maxLoops) {
+      // Proceed to the next part of the experiment (e.g., debrief)
+      finishExperimentButton.style.display = "block"; // Display the finish button
+      return;
     }
+  }
+
+  mainTrialVideo.src = videoSources[currentVideoIndex];
+}
 
     mainTrialVideo.addEventListener("ended", function() {
       console.log("Video ended. Advancing to next video.");
