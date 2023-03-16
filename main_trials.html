@@ -89,8 +89,8 @@
       mainTrialVideo.src = videoSources[currentVideoIndex];
     }
 
-    mainTrialVideo.addEventListener("pause", function() {
-  console.log("Video paused. Advancing to next video.");
+    mainTrialVideo.addEventListener("ended", function() {
+  console.log("Video ended. Advancing to next video.");
   nextVideo();
 });
 
