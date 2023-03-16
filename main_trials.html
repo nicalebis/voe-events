@@ -21,25 +21,24 @@
 
     document.addEventListener("keydown", function (event) {
   if (event.code === "Space") {
+    event.preventDefault(); // Prevent default behavior
     const currentTime = new Date().getTime();
-    const videoTime = mainTrialVideo.currentTime; // Get the current playback time of the video
-    console.log("Spacebar pressed at:", currentTime, "Video time:", videoTime);
+    console.log("Spacebar pressed at:", currentTime);
     mainTrialVideoContainer.style.borderColor = "red";
 
-    // Record the reaction time, trial ID, video time, and other necessary data here
-    dataManager.addData(currentVideoIndex, "keydown", currentTime, videoTime);
+    // Record the reaction time, trial ID, and other necessary data here
+    dataManager.addData(currentVideoIndex, "keydown", currentTime);
   }
 });
 
 document.addEventListener("keyup", function (event) {
   if (event.code === "Space") {
+    event.preventDefault(); // Prevent default behavior
     mainTrialVideoContainer.style.borderColor = "black";
     const currentTime = new Date().getTime();
-    const videoTime = mainTrialVideo.currentTime; // Get the current playback time of the video
-    dataManager.addData(currentVideoIndex, "keyup", currentTime, videoTime);
+    dataManager.addData(currentVideoIndex, "keyup", currentTime);
   }
 });
-
     
     const videoSources = [
       "videos/P1E.mp4",
