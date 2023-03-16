@@ -27,3 +27,7 @@ h1 {
 button {
   margin: 5px;
 }
+
+video:focus {
+  outline: none;
+}
