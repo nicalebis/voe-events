@@ -89,15 +89,15 @@
       mainTrialVideo.src = videoSources[currentVideoIndex];
     }
 
-    mainTrialVideo.addEventListener("ended", function() {
-      console.log("Video ended. Advancing to next video.");
-      nextVideo();
-    });
+    mainTrialVideo.addEventListener("pause", function() {
+  console.log("Video paused. Advancing to next video.");
+  nextVideo();
+});
 
     startExperimentButton.addEventListener("click", function() {
-      startExperimentButton.style.display = "none";
-      mainTrialVideo.play();
-    });
+  startExperimentButton.style.display = "none";
+  mainTrialVideo.play();
+});
 
     finishExperimentButton.addEventListener("click", function () {
       // Perform any necessary actions, such as redirecting the user to a different page
