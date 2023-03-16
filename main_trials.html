@@ -10,7 +10,7 @@
 <body>
   <h1>Main Trial</h1>
   <div class="video-container" id="mainTrialVideoContainer">
-    <video id="mainTrialVideo" width="640" height="360" controls>
+    <video id="mainTrialVideo" width="640" height="360" controls autoplay>
       <source src="videos/P1E.mp4" type="video/mp4">
     </video>
   </div>
@@ -20,92 +20,63 @@
     const mainTrialVideo = document.getElementById("mainTrialVideo");
 
     document.addEventListener("keydown", function (event) {
-  if (event.code === "Space") {
-    const currentTime = new Date().getTime();
-    console.log("Spacebar pressed at:", currentTime);
-    mainTrialVideoContainer.style.borderColor = "red";
+      if (event.code === "Space") {
+        console.log("Spacebar keydown event fired.");
+        const currentTime = new Date().getTime();
+        console.log("Spacebar pressed at:", currentTime);
+        mainTrialVideoContainer.style.borderColor = "red";
 
-    // Record the reaction time, trial ID, and other necessary data here
-    dataManager.addData(currentVideoIndex, "keydown", currentTime);
-  }
-});
+        // Record the reaction time, trial ID, and other necessary data here
+        dataManager.addData(currentVideoIndex, "keydown", currentTime);
+      }
+    });
 
-document.addEventListener("keyup", function (event) {
-  if (event.code === "Space") {
-    mainTrialVideoContainer.style.borderColor = "black";
-    const currentTime = new Date().getTime();
-    dataManager.addData(currentVideoIndex, "keyup", currentTime);
-  }
-});
+    document.addEventListener("keyup", function (event) {
+      if (event.code === "Space") {
+        console.log("Spacebar keyup event fired.");
+        mainTrialVideoContainer.style.borderColor = "black";
+        const currentTime = new Date().getTime();
+        dataManager.addData(currentVideoIndex, "keyup", currentTime);
+      }
+    });
     
     const videoSources = [
-  "videos/P1E.mp4",
-  "videos/S1E.mp4",
-  "videos/P2E.mp4",
-  "videos/S2E.mp4",
-  "videos/P3E.mp4",
-  "videos/S5E.mp4",
-  "videos/S4E.mp4",
-  "videos/P4E.mp4",
-  "videos/S3E.mp4",
-  "videos/P1E.mp4",
-  "videos/S1E.mp4",
-  "videos/P2E.mp4",
-  "videos/S2E.mp4",
-  "videos/S5E.mp4",
-  "videos/P3E.mp4",
-  "videos/S4E.mp4",
-  "videos/P4E.mp4",
-  "videos/S3E.mp4",
-  // ...
-];
+      "videos/P1E.mp4",
+      "videos/S1E.mp4",
+      "videos/P2E.mp4",
+      "videos/S2E.mp4",
+      "videos/P3E.mp4",
+      "videos/S5E.mp4",
+      "videos/S4E.mp4",
+      "videos/P4E.mp4",
+      "videos/S3E.mp4",
+    ];
 
-let currentVideoIndex = 0;
-let loopCounter = 0;
-const maxLoops = 4;
+    let currentVideoIndex = 0;
+    let loopCounter = 0;
+    const maxLoops = 4;
 
-mainTrialVideo.src = videoSources[currentVideoIndex];
+    mainTrialVideo.src = videoSources[currentVideoIndex];
 
-function nextVideo() {
-  currentVideoIndex++;
-  if (currentVideoIndex >= videoSources.length) {
-    currentVideoIndex = 0;
-    loopCounter++;
+    function nextVideo() {
+      currentVideoIndex++;
+      if (currentVideoIndex >= videoSources.length) {
+        currentVideoIndex = 0;
+        loopCounter++;
 
-    if (loopCounter >= maxLoops) {
-      // Proceed to the next part of the experiment (e.g., debrief)
-      return;
+        if (loopCounter >= maxLoops) {
+          // Proceed to the next part of the experiment (e.g., debrief)
+          return;
+        }
+      }
+
+      mainTrialVideo.src = videoSources[currentVideoIndex];
     }
-  }
 
-  mainTrialVideo.src = videoSources[currentVideoIndex];
-}
-
-mainTrialVideo.addEventListener("ended", nextVideo);
-
-function endExperiment() {
-  // Send data to the server
-  dataManager.sendDataToServer();
-
-  // Hide the current section and show the debrief section
-  document.getElementById("mainTrials").style.display = "none";
-  document.getElementById("debrief").style.display = "block";
-}
-
-function checkLoopCounter() {
-  if (loopCounter >= maxLoops) {
-    // Proceed to the next part of the experiment (e.g., debrief)
-    endExperiment();
-  }
-}
-
-// Call the checkLoopCounter function whenever necessary
-checkLoopCounter();
-
-document.getElementById("finishExperiment").addEventListener("click", function () {
-  // Perform any necessary actions, such as redirecting the user to a different page
-  console.log("Experiment finished");
-});
+    mainTrialVideo.addEventListener("ended", function() {
+      console.log("Video ended. Advancing to next video.");
+      nextVideo();
+    });
   </script>
 </body>
 </html>
