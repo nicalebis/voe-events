@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Segmentation Task</title>
+  <script src="script.js"></script>
+  <script src="/assets/javascripts/jatos.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="loading" class="hidden">
+    <h1>Loading...</h1>
+    <p>Please wait while we load the experiment.</p>
+  </div>
+  
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div id="start-section">
+    <h2>Welcome</h2>
+    <p>
+      Welcome to the experiment! Please read the instructions and provide informed consent before starting. [Include any relevant instructions or consent information here.]
+    </p>
+    <button id="start-button">Start</button>
+  </div>
+
+  <div id="welcome">
+    <h1>Welcome</h1>
+    <p>Welcome to the event segmentation task. Please read the instructions carefully.</p>
+    <button id="start-consent">Start</button>
+  </div>
+
+  <div id="consent" class="hidden">
+    <h1>Informed Consent</h1>
+    <p>Please read the informed consent carefully before proceeding.</p>
+    <button id="consent-agree">I Agree</button>
+    <button id="consent-disagree">I Disagree</button>
+  </div>
+  
+  <div id="instructions" class="hidden">
+    <h1>Instructions</h1>
+    <p>Here are the instructions for the event segmentation task.</p>
+    <button id="start-training">Start Training</button>
+  </div>
+
+  <div id="training-trials" class="hidden">
+    <h1>Training Trials</h1>
+    <p>Training trials content goes here.</p>
+    <button id="next-training-trial">Next Trial</button>
+    <button id="start-main-trials" class="hidden">Start Main Trials</button>
+  </div>
+
+  <div id="main-trials" class="hidden">
+    <h1>Main Trials</h1>
+    <p>Main trials content goes here.</p>
+    <button id="next-main-trial">Next Trial</button>
+  </div>
+  
+  <div id="attention-check" class="hidden">
+    <h1>Attention Check</h1>
+    <p>Please answer the following question to make sure you are paying attention.</p>
+    <p>What was the color of the last object you saw?</p>
+    <input type="text" id="attention-check-input" />
+    <button id="submit-attention-check">Submit</button>
+  </div>
+  
+  <div id="debrief-section" style="display:none;">
+    <h2>Debrief</h2>
+    <p>
+      Thank you for participating in the experiment! [Include any relevant debriefing information here, such as the purpose of the study, expected findings, or additional instructions for participants.]
+    </p>
+    <button id="finish-button">Finish</button>
+  </div>
+  
+  <script src="script.js"></script>
+  
+</body>
+</html>
