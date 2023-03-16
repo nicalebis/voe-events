@@ -92,7 +92,9 @@
     mainTrialVideo.addEventListener("ended", function() {
   console.log("Video ended. Advancing to next video.");
   nextVideo();
+  mainTrialVideo.play();
 });
+
 
     startExperimentButton.addEventListener("click", function() {
   startExperimentButton.style.display = "none";
