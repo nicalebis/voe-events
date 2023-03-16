@@ -92,17 +92,20 @@ function endExperiment() {
   document.getElementById("debrief").style.display = "block";
 }
 
-if (loopCounter >= maxLoops) {
-  // Proceed to the next part of the experiment (e.g., debrief)
-  endExperiment();
-  return;
+function checkLoopCounter() {
+  if (loopCounter >= maxLoops) {
+    // Proceed to the next part of the experiment (e.g., debrief)
+    endExperiment();
+  }
 }
+
+// Call the checkLoopCounter function whenever necessary
+checkLoopCounter();
 
 document.getElementById("finishExperiment").addEventListener("click", function () {
   // Perform any necessary actions, such as redirecting the user to a different page
   console.log("Experiment finished");
 });
-
   </script>
 </body>
 </html>
