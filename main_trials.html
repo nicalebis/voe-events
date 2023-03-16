@@ -86,20 +86,15 @@
     }
   }
 
-  mainTrialVideo.src = videoSources[currentVideoIndex];
+mainTrialVideo.src = videoSources[currentVideoIndex];
   mainTrialVideo.load();
   mainTrialVideo.play();
 }
 
-
-
-
-    mainTrialVideo.addEventListener("ended", function() {
-  console.log("Video ended. Advancing to next video.");
-  nextVideo();
-  mainTrialVideo.play();
-});
-
+mainTrialVideo.addEventListener("ended", function() {
+      console.log("Video ended. Advancing to next video.");
+      nextVideo();
+    });
 
     startExperimentButton.addEventListener("click", function() {
   startExperimentButton.style.display = "none";
