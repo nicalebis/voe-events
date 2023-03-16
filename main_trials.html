@@ -18,6 +18,7 @@
   <button id="finishExperiment" style="display: none;">Finish Experiment</button>
 
   <script>
+    let currentVideoIndex = 0;
     const mainTrialVideoContainer = document.getElementById("mainTrialVideoContainer");
     const mainTrialVideo = document.getElementById("mainTrialVideo");
     const startExperimentButton = document.getElementById("startExperiment");
@@ -60,8 +61,7 @@
       "videos/S3E.mp4",
     ];
 
-    let currentVideoIndex = 0
-     let loopCounter = 0;
+    let loopCounter = 0;
     const maxLoops = 4;
 
     mainTrialVideo.src = videoSources[currentVideoIndex];
