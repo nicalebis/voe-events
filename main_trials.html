@@ -60,8 +60,8 @@
       "videos/S3E.mp4",
     ];
 
-    let currentVideoIndex = 0;
-    let loopCounter = 0;
+    let currentVideoIndex = 0
+        let loopCounter = 0;
     const maxLoops = 4;
 
     mainTrialVideo.src = videoSources[currentVideoIndex];
@@ -74,29 +74,28 @@
     });
     
     function nextVideo() {
-  currentVideoIndex++;
-  if (currentVideoIndex >= videoSources.length) {
-    currentVideoIndex = 0;
-    loopCounter++;
+      currentVideoIndex++;
+      if (currentVideoIndex >= videoSources.length) {
+        currentVideoIndex = 0;
+        loopCounter++;
 
-    if (loopCounter >= maxLoops) {
-      // Proceed to the next part of the experiment (e.g., debrief)
-      finishExperimentButton.style.display = "block"; // Display the finish button
-      return;
+        if (loopCounter >= maxLoops) {
+          // Proceed to the next part of the experiment (e.g., debrief)
+          finishExperimentButton.style.display = "block"; // Display the finish button
+          return;
+        }
+      }
+
+      mainTrialVideo.src = videoSources[currentVideoIndex];
     }
-  }
-
-  mainTrialVideo.src = videoSources[currentVideoIndex];
-}
 
     mainTrialVideo.addEventListener("ended", function() {
       console.log("Video ended. Advancing to next video.");
       nextVideo();
     });
-    
-startExperimentButton.addEventListener("click", function() {
+
+    startExperimentButton.addEventListener("click", function() {
       startExperimentButton.style.display = "none";
-      finishExperimentButton.style.display = "block";
       mainTrialVideo.play();
     });
 
