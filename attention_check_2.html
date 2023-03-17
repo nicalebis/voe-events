@@ -28,7 +28,7 @@
       }
     });
 
-    let attentionCheckTask = 1;
+    let attentionCheckTask = 0;
 
     function task1(ball1, ball2) {
       if (detectCollision(ball1, ball2)) {
@@ -51,6 +51,27 @@
       }
     }
 
+    function initializeAttentionCheckTask() {
+      const taskIndex = Math.floor(Math.random() * 3);
+
+      switch (taskIndex) {
+        case 0:
+          attentionCheckTask = task1;
+          break;
+        case 1:
+          attentionCheckTask = task2;
+          break;
+        case 2:
+          attentionCheckTask = task3;
+          break;
+      }
+    }
+
+    initializeAttentionCheckTask();
+    
+    
+    
+
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -61,16 +82,10 @@
 
       for (let i = 0; i < balls.length; i++) {
         for (let j = i + 1; j < balls.length; j++) {
-          if (attentionCheckTask === 0) {
-            task1(balls[i], balls[j]);
-          }
+          attentionCheckTask(balls[i], balls[j]);
         }
 
-        if (attentionCheckTask === 1) {
-          task2(balls[i]);
-        } else if (attentionCheckTask === 2) {
-          task3(balls[i]);
-        }
+        attentionCheckTask(balls[i]);
       }
 
       requestAnimationFrame(animate);
