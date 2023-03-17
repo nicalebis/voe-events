@@ -17,13 +17,6 @@
   <button id="startExperiment">Start Experiment</button>
   <button id="finishExperiment" style="display: none;">Finish Experiment</button>
 
-<div class="attention-check-container" id="attentionCheckContainer" style="display: none;">
-  <div class="attention-check-instructions" id="attentionCheckInstructions" style="display: none;">
-    <p>Pay attention to the bouncing balls and follow the instructions.</p>
-  </div>
-  <!-- Add the rest of the attention check HTML code here -->
-</div>
-
 
   <script>
     let currentVideoIndex = 0;
@@ -60,13 +53,10 @@
     const videoSources = [
   "videos/P1E.mp4",
   "videos/S1U.mp4",
-  "attention_check_1",
   "videos/P3U.mp4",
   "videos/S5E.mp4",
-  "attention_check_2",
   "videos/S3E.mp4",
   "videos/P4U.mp4",
-  "attention_check_3",
   "videos/P2E.mp4",
   "videos/S4U.mp4",
 ];
@@ -84,49 +74,24 @@
     });
     
     
-    function nextVideo() {
+     function nextVideo() {
   currentVideoIndex++;
-
   if (currentVideoIndex >= videoSources.length) {
-    // Proceed to the next part of the experiment (e.g., debrief)
-    finishExperimentButton.style.display = "block"; // Display the finish button
-    return;
+    currentVideoIndex = 0;
+    loopCounter++;
+
+    if (loopCounter >= maxLoops) {
+      // Proceed to the next part of the experiment (e.g., debrief)
+      finishExperimentButton.style.display = "block"; // Display the finish button
+      return;
+    }
   }
 
-  const videoSource = videoSources[currentVideoIndex];
+ mainTrialVideo.src = videoSources[currentVideoIndex];
+   mainTrialVideo.load();
+   mainTrialVideo.play();
+ }
 
-  if (videoSource.startsWith("attention_check")) {
-    // Call the attention check function with the corresponding index
-    const attentionCheckIndex = parseInt(videoSource.split("_")[2], 10);
-    startAttentionCheck(attentionCheckIndex, () => {
-      console.log("Attention check completed. Advancing to the next video.");
-      nextVideo();
-    });
-  } else {
-    mainTrialVideo.src = videoSource;
-    mainTrialVideo.load();
-    mainTrialVideo.play();
-  }
-}
-
-    
-//    function nextVideo() {
-//  currentVideoIndex++;
-//  if (currentVideoIndex >= videoSources.length) {
-//    currentVideoIndex = 0;
-//    loopCounter++;
-//
-//    if (loopCounter >= maxLoops) {
-//      // Proceed to the next part of the experiment (e.g., debrief)
-//      finishExperimentButton.style.display = "block"; // Display the finish button
-//      return;
-//    }
-//  }
-
-// mainTrialVideo.src = videoSources[currentVideoIndex];
-//   mainTrialVideo.load();
-//   mainTrialVideo.play();
-// }
 
 mainTrialVideo.addEventListener("ended", function() {
       console.log("Video ended. Advancing to next video.");
@@ -157,25 +122,7 @@ finishExperimentButton.addEventListener("click", function () {
   document.body.removeChild(link);
 });
     
- function startAttentionCheck(index, callback) {
-  // Hide the mainTrialVideo and show the attention check animation
-  mainTrialVideo.style.display = "none";
-  // Replace the following line with the actual code to display the attention check animation
-  const attentionCheckContainer = document.getElementById("attentionCheckContainer");
-  attentionCheckContainer.style.display = "block";
-
-  // After the attention check trial is finished, hide the attention check animation and show the mainTrialVideo
-  // Replace the following setTimeout with the actual code to handle the end of the attention check trial
-  setTimeout(() => {
-    // Hide the attention check animation and show the mainTrialVideo
-    attentionCheckContainer.style.display = "none";
-    mainTrialVideo.style.display = "block";
-
-    // Call the provided callback function
-    callback();
-  }, 5000); // Replace 5000 with the actual duration of the attention check trial
-}
-
+ 
   </script>
 </body>
 </html>
