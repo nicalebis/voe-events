@@ -41,13 +41,13 @@
       if (event.code === "Space") {
         const currentTime = new Date().getTime();
         console.log("Spacebar pressed at:", currentTime);
-        trainingVideoContainer.style.borderColor = "red";
 
         // Record the reaction time, trial ID, and other necessary data here
         dataManager.addData('T1', 'keydown', currentTime);
         // Send the data to your server if needed
-      }
-    });
+        changeBorderColor(mainTrialVideoContainer, "blue", 200);
+  }
+});
 
     document.addEventListener("keyup", function(event) {
       if (event.code === "Space") {
