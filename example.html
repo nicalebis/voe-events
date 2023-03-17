@@ -10,25 +10,29 @@
 </head>
 <body>
   <h1>Example</h1>
-  <video id="exampleVideo" class="video-js vjs-default-skin" controls width="960" height="540" data-setup='{}'>
-    <source src="videos/P2E.mp4" type="video/mp4" autoplay>
-  </video>
-  
-<button id="proceedToTrainingTrial1">Proceed to Training Trial 1</button>
+  <div class="video-container">
+    <video id="exampleVideo" width="960" height="540">
+      <source src="videos/P1E.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <button id="startContinueButton">Start</button>
 
   <script>
     const exampleVideo = document.getElementById("exampleVideo");
+    const startContinueButton = document.getElementById("startContinueButton");
 
-    exampleVideo.addEventListener("ended", function() {
-      proceedToTrainingButton.style.display = "block";
+    startContinueButton.addEventListener("click", () => {
+      if (exampleVideo.paused) {
+        exampleVideo.play();
+      } else {
+        window.location.href = "training_trial_1.html";
+      }
     });
-    
-    document.getElementById("proceedToTrainingTrial1").addEventListener("click", function() {
-  window.location.href = "training_trial_1.html";
-});
-    
+
+    exampleVideo.addEventListener("ended", () => {
+      startContinueButton.textContent = "Continue";
+    });
   </script>
-  
 </body>
 </html>
-
