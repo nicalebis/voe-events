@@ -1,5 +1,5 @@
-let canvas;
-let ctx;
+canvas = document.getElementById("myCanvas");
+ctx = canvas.getContext("2d");
 
 // BORDER COLOR // 
 
