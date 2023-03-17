@@ -57,7 +57,13 @@ document.addEventListener("keydown", function (event) {
         const currentTime = new Date().getTime();
         const videoTime = mainTrialVideo.currentTime;
         const relativeTime = currentTime - videoStartTime;
-        dataManager.addData(currentVideoIndex, "keyup", currentTime, videoTime, relativeTime);
+        dataManager.addMainTrialData(
+      mainTrialData[currentVideoIndex].trialType,
+      mainTrialData[currentVideoIndex].outcome,
+      mainTrialData[currentVideoIndex].scene,
+      eventTime,
+      reactionTimeDifference
+    );
       }
     });
 
