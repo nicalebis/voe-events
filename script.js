@@ -1,3 +1,7 @@
+let canvas;
+let ctx;
+
+
 // PROGRESS BAR //
 
 function updateProgressBar(progress) {
