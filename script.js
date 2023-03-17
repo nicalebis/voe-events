@@ -1,3 +1,13 @@
+// PROGRESS BAR //
+
+function updateProgressBar(progress) {
+  const progressBar = document.getElementById("progressBar");
+  progressBar.style.width = progress + "%";
+  progressBar.innerHTML = progress + "%";
+}
+
+
+
 // KEYBOARD HANDLING CODE //
 
 document.addEventListener("keydown", function(event) {
