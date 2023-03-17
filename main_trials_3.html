@@ -1,1 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Trials</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data_manager.js"></script>
+</head>
+<body>
+  <h1>Main Trial</h1>
+  <div class="video-container" id="mainTrialVideoContainer">
+    <video id="mainTrialVideo" width="640" height="360">
+      <source src="videos/P1E.mp4" type="video/mp4">
+    </video>
+  </div>
+  <button id="startExperiment">Start Experiment</button>
+  <button id="finishExperiment" style="display: none;">Finish Experiment</button>
 
+
+  <script>
+    let currentVideoIndex = 0;
+    const mainTrialVideoContainer = document.getElementById("mainTrialVideoContainer");
+    const mainTrialVideo = document.getElementById("mainTrialVideo");
+    const startExperimentButton = document.getElementById("startExperiment");
+    const finishExperimentButton = document.getElementById("finishExperiment");
+    let videoStartTime = 0;
+
+    document.addEventListener("keydown", function (event) {
+      if (event.code === "Space") {
+        const currentTime = new Date().getTime();
+        const videoTime = mainTrialVideo.currentTime;
+        const relativeTime = currentTime - videoStartTime;
+        console.log("Spacebar pressed at:", currentTime, "Video time:", videoTime, "Relative time:", relativeTime);
+        mainTrialVideoContainer.style.borderColor = "red";
+
+        // Record the reaction time, trial ID, video time, relative time, and other necessary data here
+        dataManager.addData(currentVideoIndex, "keydown", currentTime, videoTime, relativeTime);
+      }
+    });
+
+    document.addEventListener("keyup", function (event) {
+      if (event.code === "Space") {
+        mainTrialVideoContainer.style.borderColor = "black";
+        const currentTime = new Date().getTime();
+        const videoTime = mainTrialVideo.currentTime;
+        const relativeTime = currentTime - videoStartTime;
+        dataManager.addData(currentVideoIndex, "keyup", currentTime, videoTime, relativeTime);
+      }
+    });
+
+  
+    const videoSources = [
+  "videos/S1U.mp4",
+  "videos/S2E.mp4",
+  "videos/S2U.mp4",
+  "videos/S3E.mp4",
+  "videos/S3U.mp4",
+];
+
+    let loopCounter = 0;
+    const maxLoops = 1;
+
+    mainTrialVideo.src = videoSources[currentVideoIndex];
+
+    mainTrialVideo.addEventListener("playing", function() {
+      videoStartTime = new Date().getTime();
+      console.log("Video started playing at:", videoStartTime);
+      // Record the start time of the video, trial ID, and other necessary data here
+      dataManager.addData(currentVideoIndex, "video_start", videoStartTime);
+    });
+    
+    
+     function nextVideo() {
+  currentVideoIndex++;
+  if (currentVideoIndex >= videoSources.length) {
+    currentVideoIndex = 0;
+    loopCounter++;
+
+    if (loopCounter >= maxLoops) {
+      // Proceed to the next part of the experiment (e.g., debrief)
+      finishExperimentButton.style.display = "block"; // Display the finish button
+      return;
+    }
+  }
+
+ mainTrialVideo.src = videoSources[currentVideoIndex];
+   mainTrialVideo.load();
+   mainTrialVideo.play();
+ }
+
+
+mainTrialVideo.addEventListener("ended", function() {
+      console.log("Video ended. Advancing to next video.");
+      nextVideo();
+    });
+
+    startExperimentButton.addEventListener("click", function() {
+  startExperimentButton.style.display = "none";
+  mainTrialVideo.play();
+});
+
+  </script>
+  
+ // PROCEED TO ATTN 3 //
+  
+<button id="proceedToAttentionCheck3">Proceed to Attention Check 1</button>
+
+<script>
+  document.getElementById("proceedToAttentionCheck3").addEventListener("click", function() {
+    window.location.href = "attention_check_3.html";
+  });
+</script> 
+
+</body>
+</html>
