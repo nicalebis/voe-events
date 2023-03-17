@@ -38,22 +38,15 @@
     });
 
     document.addEventListener("keydown", function(event) {
-      if (event.code === "Space") {
-        const currentTime = new Date().getTime();
-        console.log("Spacebar pressed at:", currentTime);
+  if (event.code === "Space") {
+    const currentTime = new Date().getTime();
+    console.log("Spacebar pressed at:", currentTime);
 
-        // Record the reaction time, trial ID, and other necessary data here
-        dataManager.addData('T1', 'keydown', currentTime);
-        // Send the data to your server if needed
-        changeBorderColor(mainTrialVideoContainer, "blue", 200);
+    // Record the reaction time, trial ID, video time, relative time, and other necessary data here
+    dataManager.addTrainingTrial1Data(currentTime);
   }
 });
-
-    document.addEventListener("keyup", function(event) {
-      if (event.code === "Space") {
-        trainingVideoContainer.style.borderColor = "black";
-      }
-    });
+    
   </script>
 </body>
 </html>
