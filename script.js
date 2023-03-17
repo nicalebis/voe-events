@@ -7,7 +7,6 @@ function updateProgressBar(progress) {
 }
 
 
-
 // KEYBOARD HANDLING CODE //
 
 document.addEventListener("keydown", function(event) {
@@ -335,3 +334,11 @@ function showDebrief() {
   document.getElementById("finish-button").addEventListener("click", function() {
     // Perform any necessary cleanup (e.g., save data, close the window, etc.)
   });
+
+function changeBorderColor(element, color, duration) {
+  element.style.borderColor = color;
+  setTimeout(() => {
+    element.style.borderColor = "black";
+  }, duration);
+}
+
