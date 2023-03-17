@@ -84,8 +84,6 @@ document.addEventListener("keydown", function (event) {
     mainTrialVideo.addEventListener("playing", function() {
       videoStartTime = new Date().getTime();
       console.log("Video started playing at:", videoStartTime);
-      // Record the start time of the video, trial ID, and other necessary data here
-      dataManager.addData(currentVideoIndex, "video_start", videoStartTime);
     });
     
     
