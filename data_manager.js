@@ -21,7 +21,7 @@ const dataManager = {
   },
   
   addTrainingTrialData(trialType, outcome, scene, eventTime, reactionTimeDifference) {
-    this.trainingTrialData.push({
+    this.trainingTrialsData.push({
       eventTime,
       reactionTimeDifference,
     });
