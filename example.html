@@ -10,13 +10,13 @@
 </head>
 <body>
   <h1>Example</h1>
-  <video id="exampleVideo" class="video-js vjs-default-skin" controls width="640" height="264" data-setup='{}'>
-    <source src="videos/P2E.mp4" type="video/mp4">
+  <video id="exampleVideo" class="video-js vjs-default-skin" controls width="960" height="396" data-setup='{}'>
+    <source src="videos/P2E.mp4" type="video/mp4" autoplay>
   </video>
   
-    <script>
-    document.getElementById("bypassButton").addEventListener("click", function() {
-      window.location.href = "example.html";
+  <script>
+    document.getElementById("proceedToTrainingButton").addEventListener("click", function() {
+      window.location.href = "training_trials.html";
     });
   </script>
   
