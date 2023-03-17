@@ -1,28 +1,29 @@
-class DataManager {
-  constructor() {
-    this.data = [];
-  }
+const dataManager = {
+  mainTrialsData: [],
+  attentionCheckData: [],
 
-  addData(trialId, eventType, time, videoTime, relativeTime) {
-    this.data.push({
-      trialId: trialId,
-      eventType: eventType,
-      time: time,
-      videoTime: videoTime,
-      relativeTime: relativeTime,
+  addMainTrialData: function (trialType, outcome, scene, reactionTimeDifference) {
+    this.mainTrialsData.push({
+      trialType: trialType,
+      outcome: outcome,
+      scene: scene,
+      reactionTimeDifference: reactionTimeDifference,
     });
-  }
+  },
 
-  exportData() {
-    const json = JSON.stringify(this.data);
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'data.json';
-    a.click();
-  }
-}
+  addAttentionCheckData: function (checkType, eventTime, reactionTime) {
+    this.attentionCheckData.push({
+      checkType: checkType,
+      eventTime: eventTime,
+      reactionTime: reactionTime,
+    });
+  },
 
-const dataManager = new DataManager();
+  getMainTrialsData: function () {
+    return this.mainTrialsData;
+  },
 
+  getAttentionCheckData: function () {
+    return this.attentionCheckData;
+  },
+};
