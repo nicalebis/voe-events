@@ -74,14 +74,19 @@
     }
 
     document.addEventListener("keydown", function (event) {
-      if (event.code === "Space") {
-        const currentTime = new Date().getTime();
-        console.log("Spacebar pressed at:", currentTime);
+  if (event.code === "Space") {
+    const currentTime = new Date().getTime();
+    console.log("Spacebar pressed at:", currentTime);
 
-        // Record the reaction time, trial ID, and other necessary data here
-        dataManager.addData(attentionCheckTask, "keydown", currentTime);
-      }
-    });
+    // Update the following lines with the correct check type and event time for the current attention check
+    const checkType = "collision"; // or "wallChange"
+    const eventTime = 10; // Replace this with the actual event time
+    const reactionTimeDifference = currentTime - eventTime;
+
+    dataManager.addAttentionCheckData(checkType, eventTime, reactionTimeDifference);
+  }
+});
+
 
     let attentionCheckTask = 1;
 
