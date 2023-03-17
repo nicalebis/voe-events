@@ -20,12 +20,15 @@ const dataManager = {
     });
   },
   
-  addTrainingTrialData(trialType, outcome, scene, eventTime, reactionTimeDifference) {
-    this.trainingTrialsData.push({
-      eventTime,
-      reactionTimeDifference,
-    });
-  },
+  addTrainingTrialData: function (trialType, outcome, scene, eventTime, reactionTimeDifference) {
+  this.trainingTrialsData.push({
+    trialType: trialType,
+    outcome: outcome,
+    scene: scene,
+    eventTime: eventTime,
+    reactionTimeDifference: reactionTimeDifference,
+  });
+},
 
   getMainTrialsData: function () {
     return this.mainTrialsData;
