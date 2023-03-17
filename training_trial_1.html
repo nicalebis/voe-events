@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Training 1</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="data_manager.js"></script>
 </head>
 <body>
   <h1>Training Trial 1</h1>
@@ -35,6 +36,26 @@
     proceedToTraining2Button.addEventListener("click", function() {
       window.location.href = "training_trials_2.html";
     });
+    
+        document.addEventListener("keydown", function(event) {
+  if (event.code === "Space") {
+    const currentTime = new Date().getTime();
+    console.log("Spacebar pressed at:", currentTime);
+    trainingVideoContainer.style.borderColor = "red";
+
+    // Record the reaction time, trial ID, and other necessary data here
+    dataManager.addData('T1', 'keydown', currentTime);
+    // Send the data to your server if needed
+  }
+});
+
+
+    document.addEventListener("keyup", function(event) {
+      if (event.code === "Space") {
+        trainingVideoContainer.style.borderColor = "black";
+      }
+    });
+    
   </script>
 </body>
 </html>
