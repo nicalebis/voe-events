@@ -124,22 +124,22 @@ canvas {
 }
 
 .video-container.example {
-  width: 70%;
+  max-width: 70%;
   margin: 0 auto;
 }
 
 .video-container.training {
-  width: 80%;
+  max-width: 80%;
   margin: 0 auto;
 }
 
 .video-container.main {
-  width: 90%;
+  max-width: 90%;
   margin: 0 auto;
 }
 
 .attention-check {
-  width: 70%;
+  max-width: 70%;
   margin: 0 auto;
 }
 
