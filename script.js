@@ -20,18 +20,6 @@ document.addEventListener("keydown", function(event) {
   }
 });
 
-// SERVER CODE //
-// Submit the data to JATOS //
-
-jatos.submitResultData(data)
-  .then(() => {
-    console.log("Data submitted successfully");
-  })
-  .catch((error) => {
-    console.error("Error submitting data:", error);
-  });
-
-
 
 // BALL ANIMATIONS CODE //
 
