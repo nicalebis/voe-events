@@ -55,10 +55,6 @@
   "videos/S1U.mp4",
   "videos/P3U.mp4",
   "videos/S5E.mp4",
-  "videos/S3E.mp4",
-  "videos/P4U.mp4",
-  "videos/P2E.mp4",
-  "videos/S4U.mp4",
 ];
 
     let loopCounter = 0;
@@ -103,26 +99,17 @@ mainTrialVideo.addEventListener("ended", function() {
   mainTrialVideo.play();
 });
 
-finishExperimentButton.addEventListener("click", function () {
-  // Perform any necessary actions, such as redirecting the user to a different page
-  console.log("Experiment finished");
-
-  // Generate the CSV file
-  const data = dataManager.getData(); // Replace with your actual data retrieving function or variable
-  const csvData = convertToCSV(data);
-  const blob = new Blob([csvData], { type: "text/csv" });
-  const url = URL.createObjectURL(blob);
-
-  // Create a download link and click it
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "experiment_results.csv";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-});
-    
- 
   </script>
+  
+ // PROCEED TO ATTN 1 //
+  
+<button id="proceedToAttentionCheck1">Proceed to Attention Check 1</button>
+
+<script>
+  document.getElementById("proceedToAttentionCheck1").addEventListener("click", function() {
+    window.location.href = "attention_check_1.html";
+  });
+</script> 
+
 </body>
 </html>
