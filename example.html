@@ -14,8 +14,8 @@
     <source src="videos/P2E.mp4" type="video/mp4" autoplay>
   </video>
   
-  <button id="proceedToTrainingButton" style="display: none;">Proceed to Training Trials</button>
-  
+<button id="proceedToTrainingTrial1">Proceed to Training Trial 1</button>
+
   <script>
     const exampleVideo = document.getElementById("exampleVideo");
     const proceedToTrainingButton = document.getElementById("proceedToTrainingButton");
@@ -23,10 +23,11 @@
     exampleVideo.addEventListener("ended", function() {
       proceedToTrainingButton.style.display = "block";
     });
-
-    proceedToTrainingButton.addEventListener("click", function() {
-      window.location.href = "training_trial_1.html";
-    });
+    
+    document.getElementById("proceedToTrainingTrial1").addEventListener("click", function() {
+  window.location.href = "training_trial_1.html";
+});
+    
   </script>
   
 </body>
