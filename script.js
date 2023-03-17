@@ -145,7 +145,7 @@ document.getElementById('start-consent').addEventListener('click', () => {
   });
   
   let trainingTrialCount = 0;
-  const totalTrainingTrials = 3; // Adjust this value based on your experimental design
+  const totalTrainingTrials = 2; // Adjust this value based on your experimental design
   
   document.getElementById('next-training-trial').addEventListener('click', () => {
     trainingTrialCount++;
@@ -160,7 +160,7 @@ document.getElementById('start-consent').addEventListener('click', () => {
   });
   
   let mainTrialCount = 0;
-  const totalMainTrials = 10; // Adjust this value based on your experimental design
+  const totalMainTrials = 18; // Adjust this value based on your experimental design
   
   document.getElementById('next-main-trial').addEventListener('click', () => {
     mainTrialCount++;
