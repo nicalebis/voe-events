@@ -99,16 +99,14 @@ mainTrialVideo.addEventListener("ended", function() {
   mainTrialVideo.play();
 });
 
- document.getElementById("finishExperimentButton").addEventListener("click", function() {
-  dataManager.exportData();
-});
-    
-    
-  finishExperimentButton.addEventListener("click", function () {
-  // Perform any necessary actions, such as redirecting the user to a different page
-  console.log("Experiment finished");
+document.getElementById("finishExperiment").addEventListener("click", function() {
+      dataManager.exportData();
+    });
 
-    
+    finishExperimentButton.addEventListener("click", function() {
+      // Perform any necessary actions, such as redirecting the user to a different page
+      console.log("Experiment finished");
+    });
   </script>
 </body>
 </html>
