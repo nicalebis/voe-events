@@ -1,6 +1,14 @@
 let canvas;
 let ctx;
 
+// BORDER COLOR // 
+
+function changeBorderColor(element, color, duration) {
+  element.style.borderColor = color;
+  setTimeout(() => {
+    element.style.borderColor = "black";
+  }, duration);
+}
 
 // PROGRESS BAR //
 
