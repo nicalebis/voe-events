@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tone Discrimination Task</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data_manager.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <h1>Tone Discrimination Task</h1>
+  <div class="video-container" id="mainTrialVideoContainer">
+    <video id="mainTrialVideo" width="640" height="360" muted>
+      <source src="videos/P1E.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    // Add your existing main trials code here, making sure to mute the videos
+
+    // Tone generation function
+    function playTone(frequency) {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.type = 'sine';
+      oscillator.frequency.value = frequency;
+      gainNode.gain.value = 0.1;
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.start();
+      setTimeout(() => {
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
+        setTimeout(() => {
+          oscillator.stop();
+        }, 300);
+      }, 300);
+    }
+
+    // Tone sequence function
+    async function playToneSequence() {
+      while (true) {
+        const frequency = Math.random() < 0.5 ? 600 : 1000;
+        playTone(frequency);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+    }
+
+    // Start the tone sequence
+    playToneSequence();
+
+    // Key event handling
+    document.addEventListener('keydown', function (event) {
+      if (event.code === 'KeyF' || event.code === 'KeyJ') {
+        const currentTime = new Date().getTime();
+        const videoTime = mainTrialVideo.currentTime;
+        const tone = event.code === 'KeyF' ? 600 : 1000;
+        console.log('Key pressed:', event.code, 'Tone:', tone, 'Time:', currentTime, 'Video time:', videoTime);
+
+        // Record the reaction time, trial ID, video time, tone, and other necessary data here
+        dataManager.addData(currentVideoIndex, 'keydown', currentTime, videoTime, tone);
+      }
+    });
+  </script>
+
+  <!-- Add your existing button and event listeners for moving between trials -->
+
+</body>
+</html>
