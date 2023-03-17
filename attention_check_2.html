@@ -16,8 +16,21 @@
 
 
   <script>
-    const canvas = document.getElementById("attentionCheckCanvas");
-    const ctx = canvas.getContext("2d");
+    let canvas;
+    let ctx;
+
+function initializeCanvasAndContext() {
+  canvas = document.getElementById("canvas");
+  if (!canvas) {
+    canvas = document.getElementById("attentionCheckCanvas");
+  }
+  ctx = canvas.getContext("2d");
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeCanvasAndContext();
+  // ... other code
+});
 
     function detectCollision(ball1, ball2) {
       const dx = ball1.x - ball2.x;
