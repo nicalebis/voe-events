@@ -10,17 +10,14 @@
 </head>
 <body>
   <h1>Attention Check 1</h1>
-<div class="attention-check">
-  <canvas id="attentionCheckCanvas" width="640" height="360"></canvas>
-</div>
-
-  document.addEventListener("DOMContentLoaded", function() {
-
-
-
+  <div class="attention-check">
+    <canvas id="attentionCheckCanvas" width="640" height="360"></canvas>
+  </div>
+  
   <script>
-    const canvas = document.getElementById("attentionCheckCanvas");
-    const ctx = canvas.getContext("2d");
+    document.addEventListener("DOMContentLoaded", function() {
+      const canvas = document.getElementById("attentionCheckCanvas");
+      const ctx = canvas.getContext("2d");
 
    
     function detectCollision(ball1, ball2) {
@@ -96,26 +93,18 @@
 
     draw();
 
-  </script>
-  
-    <script>
     updateProgressBar((4 / 18) * 100);
-  </script>
-  
-  <div class="progress-container">
-  <div id="progressBar" class="progress-bar"></div>
-</div>
 
-  
-  <button id="proceedToMainTrials2">Proceed to Main Trials 2</button>
-  
-  <script>
-    document.getElementById("proceedToMainTrials2").addEventListener("click", function() {
-      window.location.href = "main_trials_2.html";
+      document.getElementById("proceedToMainTrials2").addEventListener("click", function() {
+        window.location.href = "main_trials_2.html";
+      });
     });
   </script>
-  
-  });
-  
+
+  <div class="progress-container">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <button id="proceedToMainTrials2">Proceed to Main Trials 2</button>
 </body>
 </html>
