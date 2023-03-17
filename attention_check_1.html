@@ -15,8 +15,49 @@
     const canvas = document.getElementById("attentionCheckCanvas");
     const ctx = canvas.getContext("2d");
 
-    // Initialize the ball objects and animation logic here
-    // Implement the attention check tasks as needed
+    class Ball {
+      constructor(x, y, radius, dx, dy, color) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.dx = dx;
+        this.dy = dy;
+        this.color = color;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      update() {
+        this.x += this.dx;
+        this.y += this.dy;
+
+        if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) {
+          this.dx = -this.dx;
+        }
+
+        if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) {
+          this.dy = -this.dy;
+        }
+      }
+    }
+
+    function detectCollision(ball1, ball2) {
+      const dx = ball1.x - ball2.x;
+      const dy = ball1.y - ball2.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      return distance < ball1.radius + ball2.radius;
+    }
+
+    const ball1 = new Ball(100, 100, 20, 2, 3, "red");
+    const ball2 = new Ball(200, 200, 20, -2, -3, "blue");
+    const ball3 = new Ball(300, 150, 20, 3, 2, "green");
+    const balls = [ball1, ball2, ball3];
 
     document.addEventListener("keydown", function (event) {
       if (event.code === "Space") {
@@ -30,49 +71,51 @@
 
     let attentionCheckTask = 0;
 
-    function task1(ball1, ball2) {
-      if (detectCollision(ball1, ball2)) {
-        console.log("Task 1: Collision detected");
+    function task1() {
+      for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) {
+          if (detectCollision(balls[i], balls[j])) {
+            console.log("Task 1: Collision detected");
+          }
+        }
       }
     }
 
-    function task2(ball) {
-      if (ball.x - ball.radius <= 0 || ball.x + ball.radius >= canvas.width) {
-        console.log("Task 2: Wall collision detected");
+    function task2() {
+      for (const ball of balls) {
+        if (ball.x - ball.radius <= 0 || ball.x + ball.radius >= canvas.width) {
+          console.log("Task 2: Wall collision detected");
+        }
       }
     }
 
-    function task3(ball) {
-      if (Math.random() < 0.01) {
-        ball.color = "yellow";
-        console.log("Task 3: Ball color changed");
-      } else {
-        ball.color = "green";
+        function task3() {
+      let redBallCollisions = 0;
+      let blueBallCollisions = 0;
+      let greenBallCollisions = 0;
+
+      for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) {
+          if (detectCollision(balls[i], balls[j])) {
+            if (balls[i].color === "red" || balls[j].color === "red") {
+              redBallCollisions++;
+            }
+            if (balls[i].color === "blue" || balls[j].color === "blue") {
+              blueBallCollisions++;
+            }
+            if (balls[i].color === "green" || balls[j].color === "green") {
+              greenBallCollisions++;
+            }
+          }
+        }
       }
+
+      console.log("Task 3: Red ball collisions:", redBallCollisions);
+      console.log("Task 3: Blue ball collisions:", blueBallCollisions);
+      console.log("Task 3: Green ball collisions:", greenBallCollisions);
     }
 
-    function initializeAttentionCheckTask() {
-      const taskIndex = Math.floor(Math.random() * 3);
-
-      switch (taskIndex) {
-        case 0:
-          attentionCheckTask = task1;
-          break;
-        case 1:
-          attentionCheckTask = task2;
-          break;
-        case 2:
-          attentionCheckTask = task3;
-          break;
-      }
-    }
-
-    initializeAttentionCheckTask();
-    
-    
-    
-
-    function animate() {
+    function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const ball of balls) {
@@ -80,25 +123,38 @@
         ball.update();
       }
 
-      for (let i = 0; i < balls.length; i++) {
-        for (let j = i + 1; j < balls.length; j++) {
-          attentionCheckTask(balls[i], balls[j]);
-        }
-
-        attentionCheckTask(balls[i]);
+      switch (attentionCheckTask) {
+        case 1:
+          task1();
+          break;
+        case 2:
+          task2();
+          break;
+        case 3:
+          task3();
+          break;
+        default:
+          break;
       }
 
-      requestAnimationFrame(animate);
+      requestAnimationFrame(draw);
     }
 
-    animate();
+    draw();
+
+    // Cycle through tasks every 10 seconds
+    setInterval(() => {
+      attentionCheckTask = (attentionCheckTask + 1) % 4;
+    }, 10000);
+  </script>
   
   <button id="proceedToMainTrials2">Proceed to Main Trials 2</button>
-
+  
   <script>
     document.getElementById("proceedToMainTrials2").addEventListener("click", function() {
       window.location.href = "main_trials_2.html";
     });
   </script>
+  
 </body>
 </html>
