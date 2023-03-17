@@ -12,11 +12,9 @@
   <button id="bypassButton">Bypass Consent</button>
 
   <script>
-  document.getElementById("consentButton").addEventListener("click", function () {
-  // Proceed to the next part of the experiment (e.g., example)
-  proceedFromInformedConsent();
-});
+    document.getElementById("bypassButton").addEventListener("click", function() {
+      window.location.href = "example.html";
+    });
   </script>
-
 </body>
 </html>
