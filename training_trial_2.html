@@ -37,22 +37,6 @@
       window.location.href = "main_trials_1.html";
     });
     
-        document.addEventListener("keydown", function(event) {
-      if (event.code === "Space") {
-        const currentTime = new Date().getTime();
-        console.log("Spacebar pressed at:", currentTime);
-        trainingVideoContainer.style.borderColor = "red";
-
-        // Record the reaction time, trial ID, and other necessary data here
-        // Send the data to your server if needed
-      }
-    });
-
-    document.addEventListener("keyup", function(event) {
-      if (event.code === "Space") {
-        trainingVideoContainer.style.borderColor = "black";
-      }
-    });
     
     document.addEventListener("keydown", function(event) {
   if (event.code === "Space") {
