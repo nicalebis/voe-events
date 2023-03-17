@@ -28,30 +28,30 @@
     let videoStartTime = 0;
 
     const mainTrialData = [
-  { trialType: "type1", outcome: "outcome1", scene: "scene1" },
-  { trialType: "type2", outcome: "outcome2", scene: "scene2" },
-  { trialType: "type3", outcome: "outcome3", scene: "scene3" },
-  { trialType: "type4", outcome: "outcome4", scene: "scene4" },
-];
+      { trialType: "type1", outcome: "outcome1", scene: "scene1" },
+      { trialType: "type2", outcome: "outcome2", scene: "scene2" },
+      { trialType: "type3", outcome: "outcome3", scene: "scene3" },
+      { trialType: "type4", outcome: "outcome4", scene: "scene4" },
+    ];
 
-document.addEventListener("keydown", function (event) {
-  if (event.code === "Space") {
-    const currentTime = new Date().getTime();
-    console.log("Spacebar pressed at:", currentTime);
+    document.addEventListener("keydown", function (event) {
+      if (event.code === "Space") {
+        const currentTime = new Date().getTime();
+        console.log("Spacebar pressed at:", currentTime);
 
-    const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
-    const reactionTimeDifference = currentTime - eventTime;
+        const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
+        const reactionTimeDifference = currentTime - eventTime;
 
-    dataManager.addMainTrialData(
-      mainTrialData[currentVideoIndex].trialType,
-      mainTrialData[currentVideoIndex].outcome,
-      mainTrialData[currentVideoIndex].scene,
-      eventTime,
-      reactionTimeDifference
-    );
-    changeBorderColor(mainTrialVideoContainer, "blue", 200);
-  }
-});
+        dataManager.addMainTrialData(
+          mainTrialData[currentVideoIndex].trialType,
+          mainTrialData[currentVideoIndex].outcome,
+          mainTrialData[currentVideoIndex].scene,
+          eventTime,
+          reactionTimeDifference
+        );
+        changeBorderColor(mainTrialVideoContainer, "blue", 200);
+      }
+    });
 
     document.addEventListener("keyup", function (event) {
       if (event.code === "Space") {
@@ -59,15 +59,16 @@ document.addEventListener("keydown", function (event) {
         const currentTime = new Date().getTime();
         const videoTime = mainTrialVideo.currentTime;
         const relativeTime = currentTime - videoStartTime;
+        const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
+        const reactionTimeDifference = currentTime - eventTime;
+
         dataManager.addMainTrialData(
-      mainTrialData[currentVideoIndex].trialType,
-      mainTrialData[currentVideoIndex].outcome,
-      mainTrialData[currentVideoIndex].scene,
-      eventTime,
-      reactionTimeDifference
-    );
-      }
-    });
+          mainTrialData[currentVideoIndex].trialType,
+          mainTrialData[currentVideoIndex].outcome,
+          mainTrialData[currentVideoIndex].scene,
+          eventTime,
+          reactionTimeDifference
+        );
 
   
     const videoSources = [
