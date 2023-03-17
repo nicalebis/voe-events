@@ -26,16 +26,28 @@
     const finishExperimentButton = document.getElementById("finishExperiment");
     let videoStartTime = 0;
 
-    document.addEventListener("keydown", function (event) {
-      if (event.code === "Space") {
-        const currentTime = new Date().getTime();
-        const videoTime = mainTrialVideo.currentTime;
-        const relativeTime = currentTime - videoStartTime;
-        console.log("Spacebar pressed at:", currentTime, "Video time:", videoTime, "Relative time:", relativeTime);
+    const mainTrialData = [
+  { trialType: "type1", outcome: "outcome1", scene: "scene1" },
+  { trialType: "type2", outcome: "outcome2", scene: "scene2" },
+  { trialType: "type3", outcome: "outcome3", scene: "scene3" },
+  { trialType: "type4", outcome: "outcome4", scene: "scene4" },
+];
 
-        // Record the reaction time, trial ID, video time, relative time, and other necessary data here
-        dataManager.addData(currentVideoIndex, "keydown", currentTime, videoTime, relativeTime);
-        changeBorderColor(mainTrialVideoContainer, "blue", 200);
+document.addEventListener("keydown", function (event) {
+  if (event.code === "Space") {
+    const currentTime = new Date().getTime();
+    console.log("Spacebar pressed at:", currentTime);
+
+    const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
+    const reactionTimeDifference = currentTime - eventTime;
+
+    dataManager.addMainTrialData(
+      mainTrialData[currentVideoIndex].trialType,
+      mainTrialData[currentVideoIndex].outcome,
+      mainTrialData[currentVideoIndex].scene,
+      eventTime,
+      reactionTimeDifference
+    );
   }
 });
 
