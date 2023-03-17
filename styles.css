@@ -87,3 +87,22 @@ button:focus {
 video:focus {
   outline: none;
 }
+
+/* Add this CSS code to your styles.css file */
+.progress-container {
+  width: 100%;
+  height: 30px;
+  background-color: #f3f3f3;
+  margin-bottom: 20px;
+  border: 1px solid black;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #4caf50;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
