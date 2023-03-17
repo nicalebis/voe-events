@@ -1,0 +1,40 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attention Check 1</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data_manager.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Debrief</h1>
+    <h2>Here is your data</h2>
+
+    <!-- Add your JavaScript code here -->
+    
+  <div class="progress-container">
+  <div id="progressBar" class="progress-bar"></div>
+</div>
+  <script>
+    updateProgressBar((4 / 18) * 100);
+  </script>
+  
+    <button id="proceedToMainTrials2">Proceed to Main Trials 2</button>
+    <script>
+      document.getElementById("proceedToMainTrials2").addEventListener("click", function() {
+        window.location.href = "main_trials_2.html";
+      });
+    </script>
+  </div>
+</body>
+</html>
+
+  
+  <div class="progress-container">
+  <div id="progressBar" class="progress-bar"></div>
+</div>
+  <script>
+    updateProgressBar((4 / 18) * 100);
+  </script>
