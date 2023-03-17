@@ -31,3 +31,9 @@ button {
 video:focus {
   outline: none;
 }
+
+canvas {
+  background-color: #f0f0f0;
+}
+
+
