@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training 1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Training Trial 1</h1>
+  <p>Instructions: [Add your instructions here]</p>
+  <div class="video-container" id="trainingVideoContainer">
+    <video id="trainingVideo" width="960" height="540">
+      <source src="P3U.mp4" type="video/mp4">
+    </video>
+  </div>
+  <button id="startVideo">Start Video</button>
+  <button id="proceedToTraining2" style="display: none;">Proceed to Training Trial 2</button>
+
+  <script>
+    const trainingVideoContainer = document.getElementById("trainingVideoContainer");
+    const trainingVideo = document.getElementById("trainingVideo");
+    const startVideoButton = document.getElementById("startVideo");
+    const proceedToTraining2Button = document.getElementById("proceedToTraining2");
+
+    startVideoButton.addEventListener("click", function() {
+      trainingVideo.play();
+      startVideoButton.style.display = "none";
+    });
+
+    trainingVideo.addEventListener("ended", function() {
+      proceedToTraining2Button.style.display = "block";
+    });
+
+    proceedToTraining2Button.addEventListener("click", function() {
+      window.location.href = "training_trials_2.html";
+    });
+  </script>
+</body>
+</html>
