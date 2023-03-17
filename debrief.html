@@ -6,14 +6,56 @@
   <title>Attention Check 1</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data_manager.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Debrief</h1>
-    <h2>Here is your data</h2>
+  <h1>Debrief</h1>
+  <p>Here are the results of the experiment:</p>
 
-    <!-- Add your JavaScript code here -->
+  <div class="graphs">
+    <div class="row">
+      <div class="graph-container">
+        <canvas id="graphType"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphOutcome"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphTypeOutcome"></canvas>
+      </div>
+    </div>
+    <div class="row">
+      <div class="graph-container">
+        <canvas id="graphP1"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphP2"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphP3"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphP4"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphS1"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphS2"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphS3"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphS4"></canvas>
+      </div>
+      <div class="graph-container">
+        <canvas id="graphS5"></canvas>
+      </div>
+    </div>
+  </div>
+
     
   <div class="progress-container">
   <div id="progressBar" class="progress-bar"></div>
