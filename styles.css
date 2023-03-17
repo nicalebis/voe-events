@@ -107,3 +107,20 @@ video:focus {
   color: white;
 }
 
+/* results */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.graph-container {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
