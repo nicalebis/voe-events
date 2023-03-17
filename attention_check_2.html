@@ -3,76 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attention Check</title>
+  <title>Attention Check 2</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data_manager.js"></script>
 </head>
 <body>
-  <h1>Attention Check</h1>
+  <h1>Attention Check 2</h1>
   <canvas id="attentionCheckCanvas" width="640" height="360"></canvas>
 
   <script>
     const canvas = document.getElementById("attentionCheckCanvas");
     const ctx = canvas.getContext("2d");
 
-    // Initialize the ball objects and animation logic here
-    // Implement the attention check tasks as needed
+    // Ball class and other code from attention_check_1.html
 
-    document.addEventListener("keydown", function (event) {
-      if (event.code === "Space") {
-        const currentTime = new Date().getTime();
-        console.log("Spacebar pressed at:", currentTime);
+    function task2() {
+      for (const ball of balls) {
+        if (ball.x - ball.radius <= 0 || ball.x + ball.radius >= canvas.width) {
+          console.log("Task 2: Wall collision detected");
+          if (Math.random() < 1/3) {
+            changeColor(ball);
+          }
+        }
 
-        // Record the reaction time, trial ID, and other necessary data here
-        dataManager.addData(attentionCheckTask, "keydown", currentTime);
-      }
-    });
-
-    let attentionCheckTask = 0;
-
-    function task1(ball1, ball2) {
-      if (detectCollision(ball1, ball2)) {
-        console.log("Task 1: Collision detected");
-      }
-    }
-
-    function task2(ball) {
-      if (ball.x - ball.radius <= 0 || ball.x + ball.radius >= canvas.width) {
-        console.log("Task 2: Wall collision detected");
+        if (ball.y - ball.radius <= 0 || ball.y + ball.radius >= canvas.height) {
+          console.log("Task 2: Wall collision detected");
+          if (Math.random() < 1/3) {
+            changeColor(ball);
+          }
+        }
       }
     }
 
-    function task3(ball) {
-      if (Math.random() < 0.01) {
-        ball.color = "yellow";
-        console.log("Task 3: Ball color changed");
-      } else {
-        ball.color = "green";
-      }
-    }
-
-    function initializeAttentionCheckTask() {
-      const taskIndex = Math.floor(Math.random() * 3);
-
-      switch (taskIndex) {
-        case 0:
-          attentionCheckTask = task1;
-          break;
-        case 1:
-          attentionCheckTask = task2;
-          break;
-        case 2:
-          attentionCheckTask = task3;
-          break;
-      }
-    }
-
-    initializeAttentionCheckTask();
-    
-    
-    
-
-    function animate() {
+    function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const ball of balls) {
@@ -80,26 +43,24 @@
         ball.update();
       }
 
-      for (let i = 0; i < balls.length; i++) {
-        for (let j = i + 1; j < balls.length; j++) {
-          attentionCheckTask(balls[i], balls[j]);
-        }
-
-        attentionCheckTask(balls[i]);
+      if (attentionCheckTask === 2) {
+        task2();
       }
 
-      requestAnimationFrame(animate);
+      requestAnimationFrame(draw);
     }
 
-    animate();
+    draw();
+
   </script>
   
-  <button id="proceedToMainTrials3">Proceed to Main Trials 2</button>
-
+  <button id="proceedToMainTrials3">Proceed to Main Trials 3</button>
+  
   <script>
     document.getElementById("proceedToMainTrials3").addEventListener("click", function() {
       window.location.href = "main_trials_3.html";
     });
   </script>
+  
 </body>
 </html>
