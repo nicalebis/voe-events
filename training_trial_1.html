@@ -43,7 +43,7 @@
     console.log("Spacebar pressed at:", currentTime);
 
     // Record the reaction time, trial ID, video time, relative time, and other necessary data here
-    dataManager.addTrainingTrialData('T1', 'keydown', currentTime);
+    dataManager.addTrainingTrialData('T1', 'keydown', 'training1', currentTime, null);
     changeBorderColor(TrainingVideoContainer, "blue", 200);
   }
 });
