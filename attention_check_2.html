@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attention Check</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data_manager.js"></script>
+</head>
+<body>
+  <h1>Attention Check</h1>
+  <canvas id="attentionCheckCanvas" width="640" height="360"></canvas>
+
+  <script>
+    const canvas = document.getElementById("attentionCheckCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Initialize the ball objects and animation logic here
+    // Implement the attention check tasks as needed
+
+    document.addEventListener("keydown", function (event) {
+      if (event.code === "Space") {
+        const currentTime = new Date().getTime();
+        console.log("Spacebar pressed at:", currentTime);
+
+        // Record the reaction time, trial ID, and other necessary data here
+        dataManager.addData(attentionCheckTask, "keydown", currentTime);
+      }
+    });
+
+    let attentionCheckTask = 1;
+
+    function task1(ball1, ball2) {
+      if (detectCollision(ball1, ball2)) {
+        console.log("Task 1: Collision detected");
+      }
+    }
+
+    function task2(ball) {
+      if (ball.x - ball.radius <= 0 || ball.x + ball.radius >= canvas.width) {
+        console.log("Task 2: Wall collision detected");
+      }
+    }
+
+    function task3(ball) {
+      if (Math.random() < 0.01) {
+        ball.color = "yellow";
+        console.log("Task 3: Ball color changed");
+      } else {
+        ball.color = "green";
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const ball of balls) {
+        ball.draw();
+        ball.update();
+      }
+
+      for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) {
+          if (attentionCheckTask === 0) {
+            task1(balls[i], balls[j]);
+          }
+        }
+
+        if (attentionCheckTask === 1) {
+          task2(balls[i]);
+        } else if (attentionCheckTask === 2) {
+          task3(balls[i]);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+  
+  <button id="proceedToMainTrials2">Proceed to Main Trials 2</button>
+
+  <script>
+    document.getElementById("proceedToMainTrials2").addEventListener("click", function() {
+      window.location.href = "main_trials_2.html";
+    });
+  </script>
+</body>
+</html>
