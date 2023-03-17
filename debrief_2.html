@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debrief 2</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="data_manager.js"></script>
+</head>
+<body>
+  <h1>Attention Check Results</h1>
+  <canvas id="attentionCheckGraph" width="800" height="400"></canvas>
+  <script>
+    function createAttentionCheckGraph(data) {
+      const ctx = document.getElementById("attentionCheckGraph").getContext("2d");
+
+      const chartData = {
+        datasets: [
+          {
+            label: "Reaction Time Difference",
+            data: data.map(d => ({ x: d.eventTime, y: d.reactionTime })),
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      new Chart(ctx, {
+        type: "scatter",
+        data: chartData,
+        options: {
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Event Time',
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Reaction Time Difference',
+          },
+        },
+      },
+    },
+  });
+}
+
+const attentionCheckData = dataManager.getAttentionCheckData();
+createAttentionCheckGraph(attentionCheckData);    
+  </script>
+</body>
+</html>
