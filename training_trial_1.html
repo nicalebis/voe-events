@@ -16,7 +16,7 @@
     </video>
   </div>
   <button id="startVideo">Start Video</button>
-  <button id="proceedToTraining2" style="display: none;">Proceed to Training Trial 2</button>
+  <button id="proceedToTraining2" style="display: none;">Proceed to Training 2</button>
 
   <script>
     const trainingVideoContainer = document.getElementById("trainingVideoContainer");
@@ -34,28 +34,26 @@
     });
 
     proceedToTraining2Button.addEventListener("click", function() {
-      window.location.href = "training_trials_2.html";
+      window.location.href = "training_trial_2.html";
     });
-    
-        document.addEventListener("keydown", function(event) {
-  if (event.code === "Space") {
-    const currentTime = new Date().getTime();
-    console.log("Spacebar pressed at:", currentTime);
-    trainingVideoContainer.style.borderColor = "red";
 
-    // Record the reaction time, trial ID, and other necessary data here
-    dataManager.addData('T1', 'keydown', currentTime);
-    // Send the data to your server if needed
-  }
-});
+    document.addEventListener("keydown", function(event) {
+      if (event.code === "Space") {
+        const currentTime = new Date().getTime();
+        console.log("Spacebar pressed at:", currentTime);
+        trainingVideoContainer.style.borderColor = "red";
 
+        // Record the reaction time, trial ID, and other necessary data here
+        dataManager.addData('T1', 'keydown', currentTime);
+        // Send the data to your server if needed
+      }
+    });
 
     document.addEventListener("keyup", function(event) {
       if (event.code === "Space") {
         trainingVideoContainer.style.borderColor = "black";
       }
     });
-    
   </script>
 </body>
 </html>
