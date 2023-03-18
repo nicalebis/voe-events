@@ -1,5 +1,3 @@
-// BALL ANIMATIONS CODE //
-
 class Ball {
   constructor(x, y, radius, dx, dy, color) {
     this.x = x;
@@ -30,7 +28,7 @@ class Ball {
     this.x += this.dx;
     this.y += this.dy;
   }
-  
+
   update(canvas) {
     if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
       this.dx = -this.dx;
@@ -59,3 +57,4 @@ class Ball {
     this.draw(ctx);
   }
 }
+
