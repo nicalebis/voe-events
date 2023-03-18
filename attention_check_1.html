@@ -63,19 +63,24 @@
       let lastCollisionTime = null;
 
     function task1() {
-      for (let i = 0; i < balls.length; i++) {
-        for (let j = i + 1; j < balls.length; j++) {
-          if (detectCollision(balls[i], balls[j])) {
-            lastCollisionTime = new Date().getTime();
-            console.log("Task 1: Collision detected");
-            if (Math.random() < 1/3) {
-              changeColor(balls[i]);
-              changeColor(balls[j]);
-            }
-          }
+  for (let i = 0; i < balls.length; i++) {
+    for (let j = i + 1; j < balls.length; j++) {
+      const dx = balls[i].x - balls[j].x;
+      const dy = balls[i].y - balls[j].y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < balls[i].radius + balls[j].radius) {
+        lastCollisionTime = new Date().getTime();
+        console.log("Task 1: Collision detected");
+        if (Math.random() < 1 / 3) {
+          changeColor(balls[i]);
+          changeColor(balls[j]);
         }
       }
     }
+  }
+}
+
 
 
       function resolveCollision(ball1, ball2) {
