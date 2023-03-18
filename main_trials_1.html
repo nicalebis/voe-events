@@ -40,12 +40,11 @@
     ];
 
     document.addEventListener("keydown", function (event) {
-      if (event.code === "Space")
-const currentTime = new Date().getTime();
-    console.log("Spacebar pressed at:", currentTime);
-
+      if (event.code === "Space") {
+    const currentTime = new Date().getTime();
     const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
     const reactionTimeDifference = currentTime - eventTime;
+      console.log("Spacebar pressed at:", eventTime);
 
     dataManager.addMainTrialData(
       mainTrialData[currentVideoIndex].trialType,
