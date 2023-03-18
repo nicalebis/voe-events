@@ -9,7 +9,7 @@
   
   <div class="video-container training" id="trainingVideoContainer">
     <video id="trainingVideo" width="960" height="540">
-      <source src="videos/training2-red.mp4" type="video/mp4">
+      <source src="videos/training1-red.mp4" type="video/mp4">
     </video>
   </div>
   
@@ -36,7 +36,7 @@
     });
 
     trainingVideo.addEventListener("ended", function() {
-      proceedToMainTrialsButton.style.display = "block";
+      proceedToTrainingTrial2Button.style.display = "block";
     });
 
    
@@ -62,88 +62,6 @@
       }
     });
 
-  </script>
-</body>
-</html>
-
-
-
-
-
-  <div id="title-container">
-    <h1>Training Trial 1</h1>
-  </div>
-
-  <div id="instruction-container">
-    <p>Instructions go here</p>
-  </div>
-
-  <div id="start-container">
-    <button id="start-btn">Start Video</button>
-  </div>
-
-  <div id="video-container" class="training hidden">
-    <video id="training-video" width="960" height="540">
-      <source src="videos/training1-red.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div id="next-container" class="hidden">
-    <button id="next-btn">Next</button>
-  </div>
-
-  <script src="data_manager.js"></script>
-
-  <script>
-    const titleContainer = document.getElementById("title-container");
-    const instructionContainer = document.getElementById("instruction-container");
-    const startContainer = document.getElementById("start-container");
-    const videoContainer = document.getElementById("video-container");
-    const nextContainer = document.getElementById("next-container");
-    const startBtn = document.getElementById("start-btn");
-    const trainingVideo = document.getElementById("training-video");
-    const nextBtn = document.getElementById("next-btn");
-
-    startBtn.addEventListener("click", function() {
-      titleContainer.classList.add("hidden");
-      instructionContainer.classList.add("hidden");
-      startContainer.classList.add("hidden");
-      videoContainer.classList.remove("hidden");
-
-      trainingVideo.play();
-    });
-
-    trainingVideo.addEventListener("ended", function() {
-      videoContainer.classList.add("hidden");
-      nextContainer.classList.remove("hidden");
-    });
-
-
-
-    function changeBorderColor(element, color, duration) {
-      element.style.borderColor = color;
-      setTimeout(function () {
-        element.style.borderColor = "black";
-      }, duration);
-    }
-
-    document.addEventListener("keydown", function(event) {
-      if (event.code === "Space") {
-        const currentTime = new Date().getTime();
-        const eventTime = trainingVideo.currentTime;
-        console.log("Spacebar pressed at:", eventTime);
-
-        // Record the reaction time, trial ID, video time, relative time, and other necessary data here
-        dataManager.addTrainingTrialData('T1', 'keydown', 'training1', eventTime, null);
-        changeBorderColor(videoContainer, "blue", 200);
-      }
-    });
-
-    document.addEventListener("keyup", function(event) {
-      if (event.code === "Space") {
-        videoContainer.style.borderColor = "black";
-      }
-    });
   </script>
 </body>
 </html>
