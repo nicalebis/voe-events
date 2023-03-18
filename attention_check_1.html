@@ -69,7 +69,7 @@
       const dy = balls[i].y - balls[j].y;
       const distance = Math.sqrt(dx * dx + dy * dy);
       
-      if (distance === balls[i].radius + balls[j].radius) {
+      if (distance <= balls[i].radius + balls[j].radius) {
         lastCollisionTime = new Date().getTime();
         console.log("Task 1: Collision detected");
         if (Math.random() < 1 / 3) {
