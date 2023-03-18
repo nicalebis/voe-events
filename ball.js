@@ -17,6 +17,9 @@ class Ball {
   }
 
   move(canvas) {
+    this.x += this.dx;
+    this.y += this.dy;
+
     if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
       this.dx = -this.dx;
     }
@@ -24,36 +27,10 @@ class Ball {
     if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
       this.dy = -this.dy;
     }
-
-    this.x += this.dx;
-    this.y += this.dy;
-  }
-
-  update(canvas) {
-    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-      this.dx = -this.dx;
-    }
-
-    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-      this.dy = -this.dy;
-    }
-
-    this.x += this.dx;
-    this.y += this.dy;
   }
 
   animate(ctx, canvas) {
-    this.x += this.dx;
-    this.y += this.dy;
-
-    if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) {
-      this.dx = -this.dx;
-    }
-
-    if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) {
-      this.dy = -this.dy;
-    }
-
+    this.move(canvas);
     this.draw(ctx);
   }
 }
