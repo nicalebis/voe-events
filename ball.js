@@ -22,14 +22,10 @@ class Ball {
 
   if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
     this.dx = -this.dx;
-    // Adjust the ball's x position
-    this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
   }
 
   if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
     this.dy = -this.dy;
-    // Adjust the ball's y position
-    this.y = Math.max(this.radius, Math.min(canvas.height - this.radius, this.y));
   }
 
   update(canvas) {
