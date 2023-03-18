@@ -6,128 +6,80 @@
   <title>Attention Check 3</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data_manager.js"></script>
-    <script src="ball.js"></script>
+  <script src="ball.js"></script>
+  <script src="common_functions.js"></script>
 </head>
 <body>
   <h1>Attention Check 3</h1>
-<div class="attention-check">
-  <canvas id="attentionCheckCanvas" width="640" height="360"></canvas>
-</div>
-  
+  <div class="attention-check">
+    <canvas id="attentionCheckCanvas" width="640" height="360"></canvas>
+  </div>
   <script>
-    let canvas;
-    let ctx;
+    document.addEventListener("DOMContentLoaded", function() {
+      const canvas = document.getElementById("attentionCheckCanvas");
+      const ctx = canvas.getContext("2d");
 
-function initializeCanvasAndContext() {
-  canvas = document.getElementById("canvas");
-  if (!canvas) {
-    canvas = document.getElementById("attentionCheckCanvas");
-  }
-  ctx = canvas.getContext("2d");
-}
+      const ball1 = new Ball(100, 100, 20, 2, 3, "red");
+      const ball2 = new Ball(200, 200, 20, -2, -3, "blue");
+      const ball3 = new Ball(300, 150, 20, 3, 2, "green");
+      const balls = [ball1, ball2, ball3];
 
-document.addEventListener("DOMContentLoaded", function () {
-  initializeCanvasAndContext();
-  // ... other code
-});
+      let colorChangeTimer = 0;
+      const colorChangeInterval = 5000; // 5 seconds
 
-    
-    function detectCollision(ball1, ball2) {
-      const dx = ball1.x - ball2.x;
-      const dy = ball1.y - ball2.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      return distance < ball1.radius + ball2.radius;
-    }
+      document.addEventListener("keydown", function (event) {
+        if (event.code === "Space") {
+          const currentTime = new Date().getTime();
+          console.log("Spacebar pressed at:", currentTime);
 
-    const ball1 = new Ball(100, 100, 20, 2, 3, "red");
-    const ball2 = new Ball(200, 200, 20, -2, -3, "blue");
-    const ball3 = new Ball(300, 150, 20, 3, 2, "green");
-    const balls = [ball1, ball2, ball3];
+          const checkType = "color_change";
+          const eventTime = 10;
+          const reactionTimeDifference = currentTime - eventTime;
 
-    const colors = ["red", "blue", "green"];
+          dataManager.addAttentionCheckData(checkType, eventTime, reactionTimeDifference);
+        }
+      });
 
-    function changeColor(ball) {
-      const currentColorIndex = colors.indexOf(ball.color);
-      let newColorIndex;
-
-      do {
-        newColorIndex = Math.floor(Math.random() * colors.length);
-      } while (newColorIndex === currentColorIndex);
-
-      ball.color = colors[newColorIndex];
-    }
-
-    document.addEventListener("keydown", function (event) {
-  if (event.code === "Space") {
-    const currentTime = new Date().getTime();
-    console.log("Spacebar pressed at:", currentTime);
-
-    // Update the following lines with the correct check type and event time for the current attention check
-    const checkType = "color";
-    const eventTime = 10; // Replace this with the actual event time
-    const reactionTimeDifference = currentTime - eventTime;
-
-    dataManager.addAttentionCheckData(checkType, eventTime, reactionTimeDifference);
-  }
-});
-
-
-    let attentionCheckTask = 3;
-
-function task3() {
-      for (let i = 0; i < balls.length; i++) {
-        for (let j = i + 1; j < balls.length; j++) {
-          if (detectCollision(balls[i], balls[j])) {
-            if (Math.random() < 1 / 3) {
-              const prevColor1 = balls[i].color;
-              const prevColor2 = balls[j].color;
-              changeColor(balls[i]);
-              changeColor(balls[j]);
-              if (prevColor1 !== balls[i].color || prevColor2 !== balls[j].color) {
-                console.log("Task 3: Color change detected");
-              }
-            }
-          }
+      function task3() {
+        const currentTime = new Date().getTime();
+        if (currentTime - colorChangeTimer > colorChangeInterval) {
+          colorChangeTimer = currentTime;
+          console.log("Task 3: Random color change");
+          ball1.changeColor();
+          ball2.changeColor();
+          ball3.changeColor();
         }
       }
-    }
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      for (const ball of balls) {
-        ball.draw();
-        ball.update();
-      }
+        for (const ball of balls) {
+          ball.draw();
+          ball.update();
+        }
 
-      if (attentionCheckTask === 3) {
         task3();
+
+        requestAnimationFrame(draw);
       }
 
-      requestAnimationFrame(draw);
-    }
+      draw();
 
-    draw();
+      updateProgressBar((13 / 18) * 100);
 
-  </script>
-
-    <script>
-    updateProgressBar((14 / 18) * 100);
-  </script>
-  
-    <div class="progress-container">
-  <div id="progressBar" class="progress-bar"></div>
-</div>
-
-  
-  <button id="endExperiment">End Experiment</button>
-  
-  <script>
-    document.getElementById("endExperiment").addEventListener("click", function() {
-      // Export data and end the experiment
-      dataManager.exportData();
+      document.getElementById("proceedToCompletion").addEventListener("click", function() {
+        window.location.href = "completion.html";
+      });
     });
   </script>
-  
+  <div class="instructions">
+    <p>Press the spacebar when all balls change their color simultaneously.</p>
+  </div>
+<button id="proceedToCompletion">Proceed to Completion</button>
+
+  <div class="progress-bar-container">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
 </body>
 </html>
