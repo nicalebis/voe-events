@@ -58,3 +58,17 @@ class Ball {
   }
 }
 
+Ball.prototype.move = function(canvas) {
+  this.x += this.dx;
+  this.y += this.dy;
+
+  // check if the ball hits the left or right edge
+  if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+    this.dx = -this.dx;
+  }
+
+  // check if the ball hits the top or bottom edge
+  if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+    this.dy = -this.dy;
+  }
+};
