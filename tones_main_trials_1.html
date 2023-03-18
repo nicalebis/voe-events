@@ -59,7 +59,7 @@
     }
 
     function scheduleTones() {
-      const interval = 1000 + Math.random() * 500;
+      const interval = 1000 + Math.random() * 1000;
       setTimeout(() => {
         const tone = playRandomTone();
         tonesDataManager.addToneInterval(currentVideoIndex, tone, interval);
