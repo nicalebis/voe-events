@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attention Check</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data_manager.js"></script>
+  <script src="ball.js"></script>
+  <script src="common_functions.js"></script>
+</head>
+<body>
+  <h1>Attention Check</h1>
+  <div class="attention-check">
+    <canvas id="attentionCheckCanvas" width="640" height="360"></canvas>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const canvas = document.getElementById("attentionCheckCanvas");
+      const ctx = canvas.getContext("2d");
+
+      const ball = new Ball(320, 180, 40, 2, 3, "red");
+      const colors = ["red", "blue", "green"];
+      let attentionCheckTask = 1; // Set the initial attention check task
+      let lastEventTime = null;
+
+      function changeColor() {
+        const currentColorIndex = colors.indexOf(ball.color);
+        let newColorIndex;
+
+        do {
+          newColorIndex = Math.floor(Math.random() * colors.length);
+        } while (newColorIndex === currentColorIndex);
+
+        ball.color = colors[newColorIndex];
+      }
+
+      function task1() {
+        if (ball.x <= ball.radius || ball.x >= canvas.width - ball.radius || 
+            ball.y <= ball.radius || ball.y >= canvas.height - ball.radius) {
+          lastEventTime = new Date().getTime();
+          console.log("Task 1: Wall collision detected");
+        }
+      }
+
+      function task2() {
+        const currentTime = new Date().getTime();
+        if (currentTime - lastEventTime >= 1000) {
+          changeColor();
+          lastEventTime = currentTime;
+          console.log("Task 2: Color changed");
+        }
+      }
+
+      document.addEventListener("keydown", function(event) {
+        if (event.code === "Space") {
+          const currentTime = new Date().getTime();
+          console.log("Spacebar pressed at:", currentTime);
+
+          if (lastEventTime !== null) {
+            const reactionTime = currentTime - lastEventTime;
+            console.log("Reaction time:", reactionTime);
+            // Save reaction time to your data manager
+          }
+
+          lastEventTime = null;
+        }
+      });
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ball.animate(ctx, canvas);
+
+        if (attentionCheckTask === 1) {
+          task1();
+        } else if (attentionCheckTask === 2) {
+          task2();
+        }
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      // Update the attention check task variable when needed
+      // attentionCheckTask = 2;
+    });
+    
+    function endTask() {
+      // Stop the animation
+      cancelAnimationFrame(animationId);
+
+      // Display a message or hide the canvas (example)
+      const canvas = document.getElementById("attentionCheckCanvas");
+      canvas.style.display = "none";
+      document.getElementById("taskEndMessage").style.display = "block";
+    }
+
+    // Start the task
+    const animationId = requestAnimationFrame(draw);
+
+    // End the task after 20 seconds (20000 milliseconds)
+    setTimeout(endTask, 20000);
+    
+  </script>
+
+  <div class="instructions">
+    <p id="taskInstruction">Press the spacebar when the ball collides with a wall.</p>
+  </div>
+  <button id="switchTask">Switch Task</button>
+  <div class="progress-bar-container">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+</body>
+</html>
