@@ -19,8 +19,8 @@
     <button id="start-btn">Start Video</button>
   </div>
 
-  <div class="video-container training" id="trainingVideoContainer">
-    <video id="trainingVideo" width="960" height="540">
+  <div id="video-container training" id="trainingVideoContainer"">
+    <video id="training-video" width="960" height="540">
       <source src="videos/training1-red.mp4" type="video/mp4">
     </video>
   </div>
@@ -30,15 +30,15 @@
   </div>
   
   
-  const titleContainer = document.getElementById("title-container");
+const titleContainer = document.getElementById("title-container");
 const instructionContainer = document.getElementById("instruction-container");
 const startContainer = document.getElementById("start-container");
+const videoContainer = document.getElementById("video-container");
 const nextContainer = document.getElementById("next-container");
 const startBtn = document.getElementById("start-btn");
+const trainingVideo = document.getElementById("training-video");
 const nextBtn = document.getElementById("next-btn");
-    const trainingVideoContainer = document.getElementById("trainingVideoContainer");
-    const trainingVideo = document.getElementById("trainingVideo");
-  
+
 startBtn.addEventListener("click", function() {
   titleContainer.classList.add("hidden");
   instructionContainer.classList.add("hidden");
@@ -56,7 +56,7 @@ trainingVideo.addEventListener("ended", function() {
 nextBtn.addEventListener("click", function() {
   // Move on to next page
 });
-  
+
   
   
 
