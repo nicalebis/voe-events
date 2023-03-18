@@ -30,7 +30,6 @@ class Ball {
     this.x += this.dx;
     this.y += this.dy;
   }
-}
   
   update(canvas) {
     if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
