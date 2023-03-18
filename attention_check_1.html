@@ -27,9 +27,9 @@
         return distance < ball1.radius + ball2.radius;
       }
 
-      const ball1 = new Ball(100, 100, 20, 2, 3, "red");
-      const ball2 = new Ball(200, 200, 20, -2, -3, "blue");
-      const ball3 = new Ball(300, 150, 20, 3, 2, "green");
+      const ball1 = new Ball(100, 100, 20, 2, 3, "red", ctx);
+      const ball2 = new Ball(200, 200, 20, -2, -3, "blue", ctx);
+      const ball3 = new Ball(300, 150, 20, 3, 2, "green", ctx);
       const balls = [ball1, ball2, ball3];
 
       const colors = ["red", "blue", "green"];
