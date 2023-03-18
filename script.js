@@ -18,20 +18,6 @@ function updateProgressBar(progress) {
   progressBar.innerHTML = progress + "%";
 }
 
-
-// KEYBOARD HANDLING CODE //
-
-document.addEventListener("keydown", function(event) {
-  if (event.code === "Space") {
-    const currentTime = new Date().getTime();
-    console.log("Spacebar pressed at:", currentTime);
-
-    // Record the reaction time, trial ID, and other necessary data here
-    // Send the data to your server if needed
-  }
-});
-
-
 // BALL ANIMATIONS CODE //
 
 class Ball {
