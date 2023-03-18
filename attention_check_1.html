@@ -116,12 +116,6 @@
     ball2.x += overlap * nx * 0.5;
     ball2.y += overlap * ny * 0.5;
   }
-
-  // Keep balls within canvas bounds
-  [ball1, ball2].forEach(ball => {
-    ball.x = Math.max(ball.radius, Math.min(canvas.width - ball.radius, ball.x));
-    ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
-  });
 }
 
     let attentionCheckTask = 1; // Set the initial attention check task
