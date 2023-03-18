@@ -75,12 +75,11 @@
       }
 
       function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        for (const ball of balls) {
-          ball.draw(ctx);
-          ball.update();
-        }
+      for (const ball of balls) {
+        ball.animate(ctx);
+      }
 
         if (attentionCheckTask === 1) {
           task1();
