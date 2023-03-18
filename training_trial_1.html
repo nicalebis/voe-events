@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Training 1</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,46 +18,45 @@
     <button id="start-btn">Start Video</button>
   </div>
 
-  <div id="video-container" class="training">
+  <div id="video-container" class="training hidden">
     <video id="training-video" width="960" height="540">
       <source src="videos/training1-red.mp4" type="video/mp4">
     </video>
   </div>
-  
-  <div id="next-container">
+
+  <div id="next-container" class="hidden">
     <button id="next-btn">Next</button>
   </div>
-  
-<script src="data_manager.js"></script>
-                                                       
-<script>
-const titleContainer = document.getElementById("title-container");
-const instructionContainer = document.getElementById("instruction-container");
-const startContainer = document.getElementById("start-container");
-const videoContainer = document.getElementById("video-container");
-const nextContainer = document.getElementById("next-container");
-const startBtn = document.getElementById("start-btn");
-const trainingVideo = document.getElementById("training-video");
-const nextBtn = document.getElementById("next-btn");
 
-startBtn.addEventListener("click", function() {
-  titleContainer.classList.add("hidden");
-  instructionContainer.classList.add("hidden");
-  startContainer.classList.add("hidden");
-  videoContainer.classList.remove("hidden");
+  <script src="data_manager.js"></script>
 
-  trainingVideo.play();
-});
+  <script>
+    const titleContainer = document.getElementById("title-container");
+    const instructionContainer = document.getElementById("instruction-container");
+    const startContainer = document.getElementById("start-container");
+    const videoContainer = document.getElementById("video-container");
+    const nextContainer = document.getElementById("next-container");
+    const startBtn = document.getElementById("start-btn");
+    const trainingVideo = document.getElementById("training-video");
+    const nextBtn = document.getElementById("next-btn");
 
-trainingVideo.addEventListener("ended", function() {
-  videoContainer.classList.add("hidden");
-  nextContainer.classList.remove("hidden");
-});
+    startBtn.addEventListener("click", function() {
+      titleContainer.classList.add("hidden");
+      instructionContainer.classList.add("hidden");
+      startContainer.classList.add("hidden");
+      videoContainer.classList.remove("hidden");
 
-nextBtn.addEventListener("click", function() {
-  // Move on to next page
-});
+      trainingVideo.play();
+    });
 
+    trainingVideo.addEventListener("ended", function() {
+      videoContainer.classList.add("hidden");
+      nextContainer.classList.remove("hidden");
+    });
+
+    nextBtn.addEventListener("click", function() {
+      // Move on to next page
+    });
 
     function changeBorderColor(element, color, duration) {
       element.style.borderColor = color;
@@ -66,8 +64,6 @@ nextBtn.addEventListener("click", function() {
         element.style.borderColor = "black";
       }, duration);
     }
-
-
 
     document.addEventListener("keydown", function(event) {
       if (event.code === "Space") {
@@ -86,7 +82,6 @@ nextBtn.addEventListener("click", function() {
         videoContainer.style.borderColor = "black";
       }
     });
-
   </script>
 </body>
 </html>
