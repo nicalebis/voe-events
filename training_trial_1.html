@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Training 1</title>
   <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
   <h1>Training Trial 1</h1>
@@ -20,8 +19,14 @@
   <button id="proceedToTraining2" style="display: none;">Proceed to Training 2</button>
 
   <script src="data_manager.js"></script>
-    <script src="common_functions.js"></script>
   <script>
+    function changeBorderColor(element, color, duration) {
+      element.style.borderColor = color;
+      setTimeout(function () {
+        element.style.borderColor = "black";
+      }, duration);
+    }
+
     const trainingVideoContainer = document.getElementById("trainingVideoContainer");
     const trainingVideo = document.getElementById("trainingVideo");
     const startVideoButton = document.getElementById("startVideo");
@@ -41,22 +46,22 @@
     });
 
     document.addEventListener("keydown", function(event) {
-  if (event.code === "Space") {
-    const currentTime = new Date().getTime();
-    console.log("Spacebar pressed at:", currentTime);
+      if (event.code === "Space") {
+        const currentTime = new Date().getTime();
+        console.log("Spacebar pressed at:", currentTime);
 
-    // Record the reaction time, trial ID, video time, relative time, and other necessary data here
-    dataManager.addTrainingTrialData('T1', 'keydown', 'training1', currentTime, null);
-    changeBorderColor(trainingVideoContainer, "blue", 200);
-  }
-});
-    
+        // Record the reaction time, trial ID, video time, relative time, and other necessary data here
+        dataManager.addTrainingTrialData('T1', 'keydown', 'training1', currentTime, null);
+        changeBorderColor(trainingVideoContainer, "blue", 200);
+      }
+    });
+
     document.addEventListener("keyup", function(event) {
       if (event.code === "Space") {
         trainingVideoContainer.style.borderColor = "black";
       }
     });
-    
+
   </script>
 </body>
 </html>
