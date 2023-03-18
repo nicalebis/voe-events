@@ -130,8 +130,7 @@
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (const ball of balls) {
-    ball.move(canvas);
-    ball.animate(ctx, canvas); // added call to animate method
+    ball.animate(ctx, canvas);
   }
 
   for (let i = 0; i < balls.length; i++) {
@@ -141,6 +140,12 @@
       }
     }
   }
+
+  // Keep balls within canvas bounds
+  balls.forEach(ball => {
+    ball.x = Math.max(ball.radius, Math.min(canvas.width - ball.radius, ball.x));
+    ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
+  });
 
   if (attentionCheckTask === 1) {
     task1();
