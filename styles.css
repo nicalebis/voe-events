@@ -143,3 +143,28 @@ canvas {
   margin: 0 auto;
 }
 
+#title-container {
+  text-align: center;
+}
+
+#instruction-container {
+  text-align: center;
+}
+
+#start-container {
+  text-align: center;
+}
+
+#video-container {
+  text-align: center;
+}
+
+#next-container {
+  text-align: center;
+}
+
+#training-video {
+  max-width: 100%;
+  max-height: 100%;
+}
+
