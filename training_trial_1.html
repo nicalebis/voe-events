@@ -7,16 +7,58 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Training Trial 1</h1>
-  <p>Instructions: [Add your instructions here]</p>
-  <canvas id="myCanvas" width="800" height="600"></canvas>
+  <div id="title-container">
+    <h1>Training Trial 1</h1>
+  </div>
+
+  <div id="instruction-container">
+    <p>Instructions go here</p>
+  </div>
+
+  <div id="start-container">
+    <button id="start-btn">Start Video</button>
+  </div>
+
   <div class="video-container training" id="trainingVideoContainer">
     <video id="trainingVideo" width="960" height="540">
       <source src="videos/training1-red.mp4" type="video/mp4">
     </video>
   </div>
-  <button id="startVideo">Start Video</button>
-  <button id="proceedToTraining2" style="display: none;">Proceed to Training 2</button>
+  
+  <div id="next-container">
+    <button id="next-btn">Next</button>
+  </div>
+  
+  
+  const titleContainer = document.getElementById("title-container");
+const instructionContainer = document.getElementById("instruction-container");
+const startContainer = document.getElementById("start-container");
+const nextContainer = document.getElementById("next-container");
+const startBtn = document.getElementById("start-btn");
+const nextBtn = document.getElementById("next-btn");
+    const trainingVideoContainer = document.getElementById("trainingVideoContainer");
+    const trainingVideo = document.getElementById("trainingVideo");
+  
+startBtn.addEventListener("click", function() {
+  titleContainer.classList.add("hidden");
+  instructionContainer.classList.add("hidden");
+  startContainer.classList.add("hidden");
+  videoContainer.classList.remove("hidden");
+
+  trainingVideo.play();
+});
+
+trainingVideo.addEventListener("ended", function() {
+  videoContainer.classList.add("hidden");
+  nextContainer.classList.remove("hidden");
+});
+
+nextBtn.addEventListener("click", function() {
+  // Move on to next page
+});
+  
+  
+  
 
   <script src="data_manager.js"></script>
   <script>
@@ -27,23 +69,7 @@
       }, duration);
     }
 
-    const trainingVideoContainer = document.getElementById("trainingVideoContainer");
-    const trainingVideo = document.getElementById("trainingVideo");
-    const startVideoButton = document.getElementById("startVideo");
-    const proceedToTraining2Button = document.getElementById("proceedToTraining2");
 
-    startVideoButton.addEventListener("click", function() {
-      trainingVideo.play();
-      startVideoButton.style.display = "none";
-    });
-
-    trainingVideo.addEventListener("ended", function() {
-      proceedToTraining2Button.style.display = "block";
-    });
-
-    proceedToTraining2Button.addEventListener("click", function() {
-      window.location.href = "training_trial_2.html";
-    });
 
     document.addEventListener("keydown", function(event) {
       if (event.code === "Space") {
