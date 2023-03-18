@@ -74,11 +74,42 @@
         }
       }
 
-      function draw() {
+      function resolveCollision(ball1, ball2) {
+      const dx = ball2.x - ball1.x;
+      const dy = ball2.y - ball1.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      const unitVectorX = dx / distance;
+      const unitVectorY = dy / distance;
+
+      const relativeVelocityX = ball1.dx - ball2.dx;
+      const relativeVelocityY = ball1.dy - ball2.dy;
+
+      const dotProduct = relativeVelocityX * unitVectorX + relativeVelocityY * unitVectorY;
+
+      if (dotProduct > 0) return;
+
+      const impulse = 2 * dotProduct / (ball1.radius + ball2.radius);
+
+      ball1.dx -= impulse * unitVectorX;
+      ball1.dy -= impulse * unitVectorY;
+      ball2.dx += impulse * unitVectorX;
+      ball2.dy += impulse * unitVectorY;
+    }
+
+    function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const ball of balls) {
-        ball.animate(ctx);
+        ball.animate(ctx, canvas);
+      }
+
+      for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) {
+          if (detectCollision(balls[i], balls[j])) {
+            resolveCollision(balls[i], balls[j]);
+          }
+        }
       }
 
         if (attentionCheckTask === 1) {
