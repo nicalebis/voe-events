@@ -32,7 +32,7 @@ class Ball {
   }
 
   animate(ctx) {
-    this.update();
+    this.update(canvas);
     this.draw(ctx);
   }
 }
