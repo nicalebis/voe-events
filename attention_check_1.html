@@ -100,6 +100,15 @@
       ball2.dx += impulse * unitVectorX;
       ball2.dy += impulse * unitVectorY;
     }
+       
+      const overlap = ball1.radius + ball2.radius - distance;
+      const separationX = overlap * unitVectorX;
+      const separationY = overlap * unitVectorY;
+
+      ball1.x -= separationX / 2;
+      ball1.y -= separationY / 2;
+      ball2.x += separationX / 2;
+      ball2.y += separationY / 2;
 
     let attentionCheckTask = 1; // Set the initial attention check task
       
