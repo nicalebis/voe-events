@@ -1,18 +1,16 @@
 // BALL ANIMATIONS CODE //
 
 class Ball {
-  constructor(x, y, radius, dx, dy, color, context) {
+  constructor(x, y, radius, dx, dy, color) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.dx = dx;
     this.dy = dy;
     this.color = color;
-    this.context = context;
   }
 
-  draw() {
-    const ctx = this.context;
+  draw(ctx) {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     ctx.fillStyle = this.color;
@@ -46,24 +44,16 @@ const ball2 = new Ball(200, 200, 20, -2, -3, "blue");
 const ball3 = new Ball(300, 150, 20, 3, 2, "green");
 const balls = [ball1, ball2, ball3];
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function animate(ctx) {
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-  for (const ball of balls) {
-    ball.draw();
-    ball.update();
-  }
+  ballArray.forEach((ball) => {
+    ball.update(ctx);
+    ball.draw(ctx);
+  });
 
-  for (let i = 0; i < balls.length; i++) {
-    for (let j = i + 1; j < balls.length; j++) {
-      if (detectCollision(balls[i], balls[j])) {
-        // Handle collision logic here
-        console.log("Collision detected");
-      }
-    }
-  }
-
-  requestAnimationFrame(animate);
+  requestAnimationFrame(() => animate(ctx));
 }
 
+init();
 animate();
