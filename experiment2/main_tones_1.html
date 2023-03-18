@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Trials</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="tones_data_manager.js"></script>
+</head>
+<body>
+  <h1>Main Trial</h1>
+  <div class="video-container main" id="mainTrialVideoContainer">
+    <video id="mainTrialVideo" width="640" height="360" muted>
+      <source src="videos/P1E.mp4" type="video/mp4">
+    </video>
+  </div>
+  <button id="startExperiment">Start Experiment</button>
+  <button id="finishExperiment" style="display: none;">Finish Experiment</button>
+
+  <script>
+    let currentVideoIndex = 0;
+    const mainTrialVideoContainer = document.getElementById("mainTrialVideoContainer");
+    const mainTrialVideo = document.getElementById("mainTrialVideo");
+    const startExperimentButton = document.getElementById("startExperiment");
+    const finishExperimentButton = document.getElementById("finishExperiment");
+    let videoStartTime = 0;
+
+    const videoSources = [
+      "videos/P1E.mp4",
+      "videos/P1U.mp4",
+      "videos/P2E.mp4",
+      "videos/P2U.mp4",
+    ];
+
+    function playTone(freq) {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.type = 'sine';
+      oscillator.frequency.value = freq;
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.01);
+
+      oscillator.start(audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.3);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    }
+
+    function playRandomTone() {
+      const tone = Math.random() < 0.5 ? 600 : 1000;
+      const eventTime = mainTrialVideo.currentTime;
+      tonesDataManager.addToneData(currentVideoIndex, tone, eventTime);
+      playTone(tone);
+      return tone;
+    }
+
+    function scheduleTones() {
+      const interval = 1000 + Math.random() * 500;
+      setTimeout(() => {
+        const tone = playRandomTone();
+        tonesDataManager.addToneInterval(currentVideoIndex, tone, interval);
+        scheduleTones();
+      }, interval);
+    }
+
+    mainTrialVideo.src = videoSources[currentVideoIndex];
+
+    mainTrialVideo.addEventListener("playing", function() {
+      videoStartTime = new Date().getTime();
+      console.log("Video started playing at:", videoStartTime);
+      scheduleTones();
+    });
+
+    function nextVideo() {
+      currentVideoIndex++;
+      if (currentVideoIndex >= videoSources.length) {
+        currentVideoIndex = 0;
+        // Proceed to the next part of the experiment (e.g., main_trials_2.html)
+        window.location.href = "main_trials_2.html";
+      }
+
+      mainTrialVideo.src = videoSources[currentVideoIndex];
+      mainTrialVideo.load();
+      mainTrialVideo.play();
+}
+
+mainTrialVideo.addEventListener("ended", function() {
+  console.log("Video ended. Advancing to next video.");
+  nextVideo();
+});
+
+startExperimentButton.addEventListener("click", function() {
+  startExperimentButton.style.display = "none";
+  mainTrialVideo.play();
+});
+
+document.addEventListener("keydown", function (event) {
+  const currentTime = new Date().getTime();
+  const videoTime = mainTrialVideo.currentTime;
+  const relativeTime = currentTime - videoStartTime;
+
+  if (event.code === "KeyF" || event.code === "KeyJ") {
+    const keyPressed = event.code === "KeyF" ? "F" : "J";
+    tonesDataManager.addKeyPressData(currentVideoIndex, keyPressed, relativeTime);
+  }
+});
+
+finishExperimentButton.addEventListener("click", function() {
+  // Perform any necessary actions, such as redirecting the user to a different page
+  console.log("Experiment finished");
+});
+  </script>
+</body>
+</html>
