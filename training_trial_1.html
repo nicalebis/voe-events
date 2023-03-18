@@ -6,6 +6,70 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  
+  <div class="video-container training" id="trainingVideoContainer">
+    <video id="trainingVideo" width="960" height="540">
+      <source src="videos/training2-red.mp4" type="video/mp4">
+    </video>
+  </div>
+  
+  <button id="startVideo">Start Video</button>
+  <button id="proceedToTrainingTrial2" style="display: none;">Proceed to Training Trial 2</button>
+
+  <script src="data_manager.js"></script>
+  <script>
+    function changeBorderColor(element, color, duration) {
+      element.style.borderColor = color;
+      setTimeout(function () {
+        element.style.borderColor = "black";
+      }, duration);
+    }
+
+    const trainingVideoContainer = document.getElementById("trainingVideoContainer");
+    const trainingVideo = document.getElementById("trainingVideo");
+    const startVideoButton = document.getElementById("startVideo");
+    const proceedToMainTrialsButton = document.getElementById("proceedToMainTrials");
+
+    startVideoButton.addEventListener("click", function() {
+      trainingVideo.play();
+      startVideoButton.style.display = "none";
+    });
+
+    trainingVideo.addEventListener("ended", function() {
+      proceedToMainTrialsButton.style.display = "block";
+    });
+
+   
+    proceedToTrainingTrial2Button.addEventListener("click", function() {
+      window.location.href = "training_trail_2.html";
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.code === "Space") {
+        const currentTime = new Date().getTime();
+        const eventTime = trainingVideo.currentTime;
+        console.log("Spacebar pressed at:", eventTime);
+
+        // Record the reaction time, trial ID, video time, relative time, and other necessary data here
+        dataManager.addTrainingTrialData('T2', 'keydown', eventTime);
+        changeBorderColor(trainingVideoContainer, "blue", 200);
+      }
+    });
+
+    document.addEventListener("keyup", function(event) {
+      if (event.code === "Space") {
+        trainingVideoContainer.style.borderColor = "black";
+      }
+    });
+
+  </script>
+</body>
+</html>
+
+
+
+
+
   <div id="title-container">
     <h1>Training Trial 1</h1>
   </div>
@@ -54,9 +118,7 @@
       nextContainer.classList.remove("hidden");
     });
 
-    nextBtn.addEventListener("click", function() {
-      // Move on to next page
-    });
+
 
     function changeBorderColor(element, color, duration) {
       element.style.borderColor = color;
