@@ -17,16 +17,19 @@ class Ball {
   }
 
   move(canvas) {
-    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-      this.dx = -this.dx;
-    }
+  this.x += this.dx;
+  this.y += this.dy;
 
-    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-      this.dy = -this.dy;
-    }
+  if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+    this.dx = -this.dx;
+    // Adjust the ball's x position
+    this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
+  }
 
-    this.x += this.dx;
-    this.y += this.dy;
+  if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+    this.dy = -this.dy;
+    // Adjust the ball's y position
+    this.y = Math.max(this.radius, Math.min(canvas.height - this.radius, this.y));
   }
 
   update(canvas) {
