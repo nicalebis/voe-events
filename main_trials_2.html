@@ -6,7 +6,7 @@
   <title>Main Trials</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data_manager.js"></script>
-    <script src="script.js"></script>
+  <script src="common_functions.js"></script>
 </head>
 <body>
   <h1>Main Trial</h1>
@@ -17,7 +17,6 @@
   </div>
   <button id="startExperiment">Start Experiment</button>
   <button id="finishExperiment" style="display: none;">Finish Experiment</button>
-
 
   <script>
     let currentVideoIndex = 0;
@@ -31,7 +30,6 @@
       { trialType: "type1", outcome: "outcome1", scene: "scene1" },
       { trialType: "type2", outcome: "outcome2", scene: "scene2" },
       { trialType: "type3", outcome: "outcome3", scene: "scene3" },
-      { trialType: "type4", outcome: "outcome4", scene: "scene4" },
     ];
 
     document.addEventListener("keydown", function (event) {
@@ -69,67 +67,49 @@
           eventTime,
           reactionTimeDifference
         );
-  
-    const videoSources = [
-  "videos/P3E.mp4",
-  "videos/S3U.mp4",
-  "videos/P4U.mp4",
-  "videos/S4E.mp4",
-  "videos/S1E.mp4",
-];
+      }
+    });
 
-    let loopCounter = 0;
-    const maxLoops = 1;
+    const videoSources = [
+      "videos/S1E.mp4",
+      "videos/S1U.mp4",
+      "videos/S2E.mp4",
+    ];
 
     mainTrialVideo.src = videoSources[currentVideoIndex];
 
     mainTrialVideo.addEventListener("playing", function() {
       videoStartTime = new Date().getTime();
       console.log("Video started playing at:", videoStartTime);
+      // Record the start time of the video, trial ID, and other necessary data here
     });
-    
-    
-     function nextVideo() {
-  currentVideoIndex++;
-  if (currentVideoIndex >= videoSources.length) {
-    currentVideoIndex = 0;
-    loopCounter++;
 
-    if (loopCounter >= maxLoops) {
-      // Proceed to the next part of the experiment (e.g., debrief)
-      finishExperimentButton.style.display = "block"; // Display the finish button
-      return;
-    }
-  }
-
+    function nextVideo() {
+      currentVideoIndex++;
+      if (currentVideoIndex >= videoSources.length) {
+currentVideoIndex = 0;
+// Proceed to the next part of the experiment (e.g., main_trials_2.html)
+window.location.href = "attention_check_2.html";
+}
  mainTrialVideo.src = videoSources[currentVideoIndex];
-   mainTrialVideo.load();
-   mainTrialVideo.play();
- }
-
+  mainTrialVideo.load();
+  mainTrialVideo.play();
+}
 
 mainTrialVideo.addEventListener("ended", function() {
-      console.log("Video ended. Advancing to next video.");
-      nextVideo();
-    });
+  console.log("Video ended. Advancing to next video.");
+  nextVideo();
+});
 
-    startExperimentButton.addEventListener("click", function() {
+startExperimentButton.addEventListener("click", function() {
   startExperimentButton.style.display = "none";
   mainTrialVideo.play();
 });
 
-  </script>
-  
- // PROCEED TO ATTN 2 //
-  
-<button id="proceedToAttentionCheck2">Proceed to Attention Check 1</button>
-
-<script>
-  document.getElementById("proceedToAttentionCheck2").addEventListener("click", function() {
-    window.location.href = "attention_check_2.html";
-  });
-</script> 
-
+finishExperimentButton.addEventListener("click", function() {
+  // Perform any necessary actions, such as redirecting the user to a different page
+  console.log("Experiment finished");
+});
+   </script>
 </body>
-</html>
-
+</html>   
