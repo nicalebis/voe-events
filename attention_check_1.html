@@ -89,64 +89,32 @@
   const distance = Math.sqrt(dx * dx + dy * dy);
 
   if (distance < ball1.radius + ball2.radius) {
-    // Calculate the angle of collision
-    const angle = Math.atan2(dy, dx);
-    const sine = Math.sin(angle);
-    const cosine = Math.cos(angle);
+    // Calculate the unit vector of the collision normal
+    const nx = dx / distance;
+    const ny = dy / distance;
 
-    // Rotate ball1's position
-    const pos1 = { x: 0, y: 0 };
+    // Calculate the relative velocity of the balls
+    const dvx = ball2.dx - ball1.dx;
+    const dvy = ball2.dy - ball1.dy;
+    const dotProduct = dvx * nx + dvy * ny;
 
-    // Rotate ball2's position
-    const pos2 = {
-      x: distance * cosine,
-      y: distance * sine
-    };
+    // Calculate the impulse scalar
+    const mass1 = Math.PI * ball1.radius ** 2;
+    const mass2 = Math.PI * ball2.radius ** 2;
+    const impulse = (2 * dotProduct) / (mass1 + mass2);
 
-    // Rotate ball1's velocity
-    const vel1 = {
-      x: ball1.dx * cosine + ball1.dy * sine,
-      y: ball1.dy * cosine - ball1.dx * sine
-    };
+    // Apply the impulse to the velocities
+    ball1.dx += impulse * nx * mass2;
+    ball1.dy += impulse * ny * mass2;
+    ball2.dx -= impulse * nx * mass1;
+    ball2.dy -= impulse * ny * mass1;
 
-    // Rotate ball2's velocity
-    const vel2 = {
-      x: ball2.dx * cosine + ball2.dy * sine,
-      y: ball2.dy * cosine - ball2.dx * sine
-    };
-
-    // Swap the x-velocities for the collision response
-    const temp = vel1.x;
-    vel1.x = vel2.x;
-    vel2.x = temp;
-
-    // Separate the balls to avoid overlap
+    // Separate the balls along the collision normal
     const overlap = ball1.radius + ball2.radius - distance;
-    pos1.x -= overlap / 2;
-    pos2.x += overlap / 2;
-
-    // Rotate positions back to the original coordinate system
-    const finalPos1 = {
-      x: ball1.x + (pos1.x * cosine - pos1.y * sine),
-      y: ball1.y + (pos1.y * cosine + pos1.x * sine)
-    };
-
-    const finalPos2 = {
-      x: ball1.x + (pos2.x * cosine - pos2.y * sine),
-      y: ball1.y + (pos2.y * cosine + pos2.x * sine)
-    };
-
-    // Update ball positions
-    ball1.x = finalPos1.x;
-    ball1.y = finalPos1.y;
-    ball2.x = finalPos2.x;
-    ball2.y = finalPos2.y;
-
-    // Rotate velocities back to the original coordinate system
-    ball1.dx = vel1.x * cosine - vel1.y * sine;
-    ball1.dy = vel1.y * cosine + vel1.x * sine;
-    ball2.dx = vel2.x * cosine - vel2.y * sine;
-    ball2.dy = vel2.y * cosine + vel2.x * sine;
+    ball1.x -= overlap * nx * 0.5;
+    ball1.y -= overlap * ny * 0.5;
+    ball2.x += overlap * nx * 0.5;
+    ball2.y += overlap * ny * 0.5;
   }
 }
 
