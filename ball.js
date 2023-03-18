@@ -18,12 +18,12 @@ class Ball {
     ctx.closePath();
   }
 
-  update() {
-    if (this.x + this.radius > 640 || this.x - this.radius < 0) {
+  update(canvas) {
+    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
       this.dx = -this.dx;
     }
 
-    if (this.y + this.radius > 360 || this.y - this.radius < 0) {
+    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
       this.dy = -this.dy;
     }
 
