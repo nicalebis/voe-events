@@ -120,11 +120,18 @@
 
     let attentionCheckTask = 1; // Set the initial attention check task
       
-    function draw() {
+    // Update the draw function
+function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Keep balls within canvas bounds
   balls.forEach(ball => {
+    if (ball.x - ball.radius <= 0 || ball.x + ball.radius >= canvas.width) {
+      ball.dx = -ball.dx;
+    }
+    if (ball.y - ball.radius <= 0 || ball.y + ball.radius >= canvas.height) {
+      ball.dy = -ball.dy;
+    }
     ball.x = Math.max(ball.radius, Math.min(canvas.width - ball.radius, ball.x));
     ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
   });
@@ -147,6 +154,7 @@
 
   requestAnimationFrame(draw);
 }
+
 draw();
 
       updateProgressBar((4 / 18) * 100);
