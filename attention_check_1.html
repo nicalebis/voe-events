@@ -27,9 +27,9 @@
         return distance < ball1.radius + ball2.radius;
       }
 
-      const ball1 = new Ball(100, 100, 20, 2, 3, "red", ctx);
-      const ball2 = new Ball(200, 200, 20, -2, -3, "blue", ctx);
-      const ball3 = new Ball(300, 150, 20, 3, 2, "green", ctx);
+      const ball1 = new Ball(100, 100, 20, 2, 3, "red");
+      const ball2 = new Ball(200, 200, 20, -2, -3, "blue");
+      const ball3 = new Ball(300, 150, 20, 3, 2, "green");
       const balls = [ball1, ball2, ball3];
 
       const colors = ["red", "blue", "green"];
@@ -78,7 +78,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (const ball of balls) {
-          ball.draw();
+          ball.draw(ctx);
           ball.update();
         }
 
@@ -100,11 +100,9 @@
   </script>
 
   <div class="instructions">
-<p>Press the spacebar when two balls collide.</p>
-
+<p>Press the spacebar when two balls collide</p>
   </div>
 <button id="proceedToMainTrials2">Proceed to Main Trials 2</button>
-
   <div class="progress-bar-container">
     <div id="progressBar" class="progress-bar"></div>
   </div>
