@@ -47,10 +47,11 @@
     document.addEventListener("keydown", function(event) {
       if (event.code === "Space") {
         const currentTime = new Date().getTime();
-        console.log("Spacebar pressed at:", currentTime);
+        const eventTime = trainingVideo.currentTime;
+        console.log("Spacebar pressed at:", eventTime);
 
         // Record the reaction time, trial ID, video time, relative time, and other necessary data here
-        dataManager.addTrainingTrialData('T2', 'keydown', currentTime);
+        dataManager.addTrainingTrialData('T2', 'keydown', eventTime);
         changeBorderColor(trainingVideoContainer, "blue", 200);
       }
     });
