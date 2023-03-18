@@ -31,8 +31,18 @@ class Ball {
     this.y += this.dy;
   }
 
-  animate(ctx) {
-    this.update(canvas);
+  animate(ctx, canvas) {
+    this.x += this.dx;
+    this.y += this.dy;
+
+    if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) {
+      this.dx = -this.dx;
+    }
+
+    if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) {
+      this.dy = -this.dy;
+    }
+
     this.draw(ctx);
   }
 }
