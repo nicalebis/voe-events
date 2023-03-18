@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Main Trials</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="data_manager.js"></script>
-  <script src="script.js"></script>
 </head>
 <body>
   <h1>Main Trial</h1>
@@ -18,8 +16,15 @@
   <button id="startExperiment">Start Experiment</button>
   <button id="finishExperiment" style="display: none;">Finish Experiment</button>
 
-
+  <script src="data_manager.js"></script>
   <script>
+    function changeBorderColor(element, color, duration) {
+      element.style.borderColor = color;
+      setTimeout(function () {
+        element.style.borderColor = "black";
+      }, duration);
+    }
+
     let currentVideoIndex = 0;
     const mainTrialVideoContainer = document.getElementById("mainTrialVideoContainer");
     const mainTrialVideo = document.getElementById("mainTrialVideo");
@@ -35,43 +40,43 @@
     ];
 
     document.addEventListener("keydown", function (event) {
-      if (event.code === "Space") {
-        const currentTime = new Date().getTime();
-        console.log("Spacebar pressed at:", currentTime);
+      if (event.code === "Space")
+const currentTime = new Date().getTime();
+    console.log("Spacebar pressed at:", currentTime);
 
-        const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
-        const reactionTimeDifference = currentTime - eventTime;
+    const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
+    const reactionTimeDifference = currentTime - eventTime;
 
-        dataManager.addMainTrialData(
-          mainTrialData[currentVideoIndex].trialType,
-          mainTrialData[currentVideoIndex].outcome,
-          mainTrialData[currentVideoIndex].scene,
-          eventTime,
-          reactionTimeDifference
-        );
-        changeBorderColor(mainTrialVideoContainer, "blue", 200);
-      }
-    });
+    dataManager.addMainTrialData(
+      mainTrialData[currentVideoIndex].trialType,
+      mainTrialData[currentVideoIndex].outcome,
+      mainTrialData[currentVideoIndex].scene,
+      eventTime,
+      reactionTimeDifference
+    );
+    changeBorderColor(mainTrialVideoContainer, "blue", 200);
+  }
+});
 
-    document.addEventListener("keyup", function (event) {
-      if (event.code === "Space") {
-        mainTrialVideoContainer.style.borderColor = "black";
-        const currentTime = new Date().getTime();
-        const videoTime = mainTrialVideo.currentTime;
-        const relativeTime = currentTime - videoStartTime;
-        const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
-        const reactionTimeDifference = currentTime - eventTime;
+document.addEventListener("keyup", function (event) {
+  if (event.code === "Space") {
+    mainTrialVideoContainer.style.borderColor = "black";
+    const currentTime = new Date().getTime();
+    const videoTime = mainTrialVideo.currentTime;
+    const relativeTime = currentTime - videoStartTime;
+    const eventTime = mainTrialVideo.currentTime; // Use the current video time as the event time
+    const reactionTimeDifference = currentTime - eventTime;
 
-        dataManager.addMainTrialData(
-          mainTrialData[currentVideoIndex].trialType,
-          mainTrialData[currentVideoIndex].outcome,
-          mainTrialData[currentVideoIndex].scene,
-          eventTime,
-          reactionTimeDifference
-        );
-      }
-   });
-  
+    dataManager.addMainTrialData(
+      mainTrialData[currentVideoIndex].trialType,
+      mainTrialData[currentVideoIndex].outcome,
+      mainTrialData[currentVideoIndex].scene,
+      eventTime,
+      reactionTimeDifference
+    );
+  }
+});
+
     const videoSources = [
   "videos/P1E.mp4",
   "videos/P1U.mp4",
@@ -79,18 +84,17 @@
   "videos/P2U.mp4",
 ];
 
-    let loopCounter = 0;
-    const maxLoops = 1;
+let loopCounter = 0;
+const maxLoops = 1;
 
-    mainTrialVideo.src = videoSources[currentVideoIndex];
+mainTrialVideo.src = videoSources[currentVideoIndex];
 
-    mainTrialVideo.addEventListener("playing", function() {
-      videoStartTime = new Date().getTime();
-      console.log("Video started playing at:", videoStartTime);
-    });
-    
-    
-     function nextVideo() {
+mainTrialVideo.addEventListener("playing", function() {
+  videoStartTime = new Date().getTime();
+  console.log("Video started playing at:", videoStartTime);
+});
+
+function nextVideo() {
   currentVideoIndex++;
   if (currentVideoIndex >= videoSources.length) {
     currentVideoIndex = 0;
@@ -103,31 +107,30 @@
     }
   }
 
- mainTrialVideo.src = videoSources[currentVideoIndex];
-   mainTrialVideo.load();
-   mainTrialVideo.play();
- }
-
+  mainTrialVideo.src = videoSources[currentVideoIndex];
+  mainTrialVideo.load();
+  mainTrialVideo.play();
+}
 
 mainTrialVideo.addEventListener("ended", function() {
-      console.log("Video ended. Advancing to next video.");
-      nextVideo();
-    });
+  console.log("Video ended. Advancing to next video.");
+  nextVideo();
+});
 
-    startExperimentButton.addEventListener("click", function() {
+startExperimentButton.addEventListener("click", function() {
   startExperimentButton.style.display = "none";
   mainTrialVideo.play();
 });
-
-  </script>
-  
+    
+    </script>
 <button id="proceedToAttentionCheck1">Proceed to Attention Check 1</button>
 
-<script>
-  document.getElementById("proceedToAttentionCheck1").addEventListener("click", function() {
-    window.location.href = "attention_check_1.html";
-  });
-</script> 
-
+  <script>
+    document.getElementById("proceedToAttentionCheck1").addEventListener("click", function() {
+      window.location.href = "attention_check_1.html";
+    });
+  </script> 
 </body>
 </html>
+
+    
