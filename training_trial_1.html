@@ -77,13 +77,13 @@ nextBtn.addEventListener("click", function() {
 
         // Record the reaction time, trial ID, video time, relative time, and other necessary data here
         dataManager.addTrainingTrialData('T1', 'keydown', 'training1', eventTime, null);
-        changeBorderColor(trainingVideoContainer, "blue", 200);
+        changeBorderColor(videoContainer, "blue", 200);
       }
     });
 
     document.addEventListener("keyup", function(event) {
       if (event.code === "Space") {
-        trainingVideoContainer.style.borderColor = "black";
+        videoContainer.style.borderColor = "black";
       }
     });
 
