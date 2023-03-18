@@ -6,7 +6,6 @@
   <title>Main Trials</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data_manager.js"></script>
-    <script src="script.js"></script>
 </head>
 <body>
   <h1>Main Trial</h1>
@@ -17,7 +16,6 @@
   </div>
   <button id="startExperiment">Start Experiment</button>
   <button id="finishExperiment" style="display: none;">Finish Experiment</button>
-
 
   <script>
     let currentVideoIndex = 0;
@@ -71,14 +69,13 @@
         );
       }
     });
-    
-   
+
     const videoSources = [
-  "videos/S4E.mp4",
-  "videos/S4U.mp4",
-  "videos/S5E.mp4",
-  "videos/S5U.mp4",
-];
+      "videos/S4E.mp4",
+      "videos/S4U.mp4",
+      "videos/S5E.mp4",
+      "videos/S5U.mp4",
+    ];
 
     let loopCounter = 0;
     const maxLoops = 1;
@@ -87,12 +84,12 @@
 
     mainTrialVideo.addEventListener("playing", function() {
       videoStartTime = new Date().getTime();
-      console.log("Video started playing at:", videoStartTime);
-      // Record the start time of the video, trial ID, and other necessary data here
-    });
-    
-    
-     function nextVideo() {
+      console.log("Video started playing at:", videoStartTime
+     
+     // Record the start time of the video, trial ID, and other necessary data here
+});
+
+function nextVideo() {
   currentVideoIndex++;
   if (currentVideoIndex >= videoSources.length) {
     currentVideoIndex = 0;
@@ -105,57 +102,53 @@
     }
   }
 
- mainTrialVideo.src = videoSources[currentVideoIndex];
-   mainTrialVideo.load();
-   mainTrialVideo.play();
- }
-
+  mainTrialVideo.src = videoSources[currentVideoIndex];
+  mainTrialVideo.load();
+  mainTrialVideo.play();
+}
 
 mainTrialVideo.addEventListener("ended", function() {
-      console.log("Video ended. Advancing to next video.");
-      nextVideo();
-    });
+  console.log("Video ended. Advancing to next video.");
+  nextVideo();
+});
 
-    startExperimentButton.addEventListener("click", function() {
+startExperimentButton.addEventListener("click", function() {
   startExperimentButton.style.display = "none";
   mainTrialVideo.play();
 });
 
 document.getElementById("finishExperiment").addEventListener("click", function() {
-      dataManager.exportData();
-    });
+  dataManager.exportData();
+});
 
-    finishExperimentButton.addEventListener("click", function() {
-      // Perform any necessary actions, such as redirecting the user to a different page
-      console.log("Experiment finished");
-    });
-  </script>
-  
+finishExperimentButton.addEventListener("click", function() {
+  // Perform any necessary actions, such as redirecting the user to a different page
+  console.log("Experiment finished");
+});
+
+      </script>
 <button id="proceedToDebrief">Proceed to Debrief</button>
 
-<script>
-  function downloadCSV(data, filename) {
-    const csvContent = data.map(e => e.join(",")).join("\n");
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
+  <script>
+    function downloadCSV(data, filename) {
+      const csvContent = data.map(e => e.join(",")).join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
 
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    link.style.display = "none";
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.style.display = "none";
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
 
-  document.getElementById("proceedToDebrief").addEventListener("click", function () {
-    // Replace "dataManager.data" with the actual data variable you want to download
-    downloadCSV(dataManager.data, "experiment_data.csv");
-    window.location.href = "debrief.html";
-  });
-</script>
-
-
+    document.getElementById("proceedToDebrief").addEventListener("click", function () {
+      // Replace "dataManager.data" with the actual data variable you want to download
+      downloadCSV(dataManager.data, "experiment_data.csv");
+      window.location.href = "debrief.html";
+    });
+  </script>
 </body>
 </html>
-
