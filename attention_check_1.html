@@ -104,10 +104,10 @@
     const impulse = (2 * dotProduct) / (mass1 + mass2);
 
     // Apply the impulse to the velocities
-    ball1.dx += impulse * nx * mass2;
-    ball1.dy += impulse * ny * mass2;
-    ball2.dx -= impulse * nx * mass1;
-    ball2.dy -= impulse * ny * mass1;
+    ball1.dx -= impulse * mass2 * nx;
+    ball1.dy -= impulse * mass2 * ny;
+    ball2.dx += impulse * mass1 * nx;
+    ball2.dy += impulse * mass1 * ny;
 
     // Separate the balls along the collision normal
     const overlap = ball1.radius + ball2.radius - distance;
