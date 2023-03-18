@@ -120,28 +120,29 @@
     let attentionCheckTask = 1; // Set the initial attention check task
       
     function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      for (const ball of balls) {
-        ball.animate(ctx, canvas);
+  for (const ball of balls) {
+    ball.move(canvas);
+    ball.animate(ctx, canvas); // added call to animate method
+  }
+
+  for (let i = 0; i < balls.length; i++) {
+    for (let j = i + 1; j < balls.length; j++) {
+      if (detectCollision(balls[i], balls[j])) {
+        resolveCollision(balls[i], balls[j]);
       }
+    }
+  }
 
-      for (let i = 0; i < balls.length; i++) {
-        for (let j = i + 1; j < balls.length; j++) {
-          if (detectCollision(balls[i], balls[j])) {
-            resolveCollision(balls[i], balls[j]);
-          }
-        }
-      }
+  if (attentionCheckTask === 1) {
+    task1();
+  }
 
-        if (attentionCheckTask === 1) {
-          task1();
-        }
+  requestAnimationFrame(draw);
+}
 
-        requestAnimationFrame(draw);
-      }
-
-      draw();
+draw();
 
       updateProgressBar((4 / 18) * 100);
 
