@@ -19,6 +19,8 @@
     document.addEventListener("DOMContentLoaded", function() {
       const canvas = document.getElementById("attentionCheckCanvas");
       const ctx = canvas.getContext("2d");
+      
+      let attentionCheckTask = 1; // Set the initial attention check task
 
       function detectCollision(ball1, ball2) {
         const dx = ball1.x - ball2.x;
