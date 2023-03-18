@@ -46,19 +46,19 @@
       }
 
       document.addEventListener("keydown", function (event) {
-      if (event.code === "Space") {
-        const currentTime = new Date().getTime();
-        console.log("Spacebar pressed at:", currentTime);
+  if (event.code === "Space") {
+    const currentTime = new Date().getTime();
+    console.log("Spacebar pressed at:", currentTime);
 
-        if (lastCollisionTime !== null) {
-          const reactionTime = currentTime - lastCollisionTime;
-          console.log("Reaction time:", reactionTime);
-          dataManager.addAttentionCheckData("collision", lastCollisionTime, reactionTime);
-        }
+    if (lastCollisionTime !== null) {
+      const reactionTime = currentTime - lastCollisionTime;
+      console.log("Reaction time:", reactionTime);
+      dataManager.addAttentionCheckData("collision", lastCollisionTime, reactionTime);
+    }
 
-        lastCollisionTime = null;
-      }
-    });
+    lastCollisionTime = null;
+  }
+});
 
       let lastCollisionTime = null;
 
